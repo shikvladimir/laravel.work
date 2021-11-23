@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ChatsController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\ChatsUserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegistrationController;
@@ -31,17 +32,14 @@ Route::get('login',[LoginController::class, 'login'])
 Route::post('login',[LoginController::class, 'checkLogin'])
     ->name('checkLogin');
 
-Route::get('login',[LoginController::class, 'chat'])
-    ->name('chat');
-
-
 Route::get('registration',[RegistrationController::class, 'registration'])
     ->name('registration');
 
 Route::post('registration',[RegistrationController::class, 'stepRegistration'])
     ->name('stepRegistration');
 
-
+Route::post('chatsUser',[ChatsUserController::class, 'chatsUser'])
+    ->name('chatsUser');
 
 
 Route::prefix('admin')->name('admin.')

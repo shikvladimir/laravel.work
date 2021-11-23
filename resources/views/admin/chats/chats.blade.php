@@ -173,24 +173,6 @@
                 <li>
                     <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
                 </li>
-                <li>
-                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i
-                            class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
-                    <ul id="demo" class="collapse">
-                        <li>
-                            <a href="#">Dropdown Item</a>
-                        </li>
-                        <li>
-                            <a href="#">Dropdown Item</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
-                </li>
-                <li>
-                    <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
-                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -202,40 +184,50 @@
 
             <!-- Page Heading -->
             <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">
-                        Чат <small>Сообщения от посетителей</small>
-                    </h1>
-                        <ol class="breadcrumb">
-                            <li class="active">
-                                <i class="fa fa-user"></i>
-                            </li>
-                        </ol>
-                </div>
+                <h1 class="page-header">
+                    Чат <small>Сообщения от посетителей</small>
+                </h1>
             </div>
 
             <!-- /.row -->
-
-                <div class="col-lg-12 bg-transparent">
-                    <div class="p-right">
-                        <div class="col-md-4 p-right-left">
-                            <p>Входящее сообщение: </p>
-                            <p>Имя: </p>
-                            <p>Фамилия: </p>
-                            <p>Email: </p>
-                            <p>Контактный номер: </p>
-                            <p>Статус аккаунта: </p>
+            <div class="chat-popup bg-light">
+                <form action="{{route('admin.chats.store')}}" method="post" class="form-container">
+                    @csrf
+                    <h3>Входящее сообщение: </h3>
+                    @foreach($chatUser as $item)
+                    <div class="form-group">
+                            <lable>
+                                User:
+                            </lable>
+                        <div class="form-control col-6">
+                            <p>{{$item}}</p>
                         </div>
-
+                        @endforeach
+                        @foreach($chatAdmin as $item)
+                            <lable>
+                                Admin:
+                            </lable>
+                        <div class="form-control col-6">
+                            <p>{{$item}}</p>
+                        </div>
+                        @endforeach
                     </div>
-                    <ol class="breadcrumb">
-                        <li class="active">
-                            <i class="fa fa-fw"></i>
-                        </li>
-                    </ol>
-                </div>
+                    <label>Сообщение</label>
+                    <div>
+                            <textarea class="form-control" name="a_message" required>
+                            </textarea>
+                    </div>
+                    <button type="submit" class="btn btn-info">Отправить</button>
+                </form>
+            </div>
 
-        <!-- /.row -->
+
+            <ol class="breadcrumb">
+                <li class="active">
+                    <i class="fa fa-fw"></i>
+                </li>
+            </ol>
+            <!-- /.row -->
 
         </div>
         <!-- /.container-fluid -->

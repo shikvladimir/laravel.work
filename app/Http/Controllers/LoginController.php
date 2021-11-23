@@ -9,15 +9,33 @@ use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
-    public function login(){
-        return view('auth.login');
+    public function login(Request $request)
+    {
+        session_start();
+
+        $chatUser = Session::get('chatUser', []);
+//        $u_message = $request->input('u_message');
+//        $chatUser['u_message'] = $u_message;
+//        array_push($chatUser, $u_message);
+//        Session::put('chatUser', $chatUser);
+
+
+        $chatAdmin = Session::get('chatAdmin', []);
+//        $a_message = $request->input('a_message');
+//        $chatAdmin['a_message'] = $a_message;
+//        array_push($chatAdmin, $a_message);
+//        Session::put('chatAdmin', $chatAdmin);
+
+        session_destroy();
+        return view('auth.login',compact('chatUser','chatAdmin'));
     }
 
-    public function checkLogin(Request $request){
+    public function checkLogin(Request $request)
+    {
 
-        if(Auth::attempt(['email' =>$request->email,'password'=>$request->password,'confirmed' => 1])){
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'confirmed' => 1])) {
             return view('home.home');
-        }else{
+        } else {
             return view('auth.login');
         }
 
@@ -36,11 +54,4 @@ class LoginController extends Controller
         return back()->with('success', 'Product successfully added.');
     }
 
-    public function chat(Request $request){
-//        session_start();
-        $_SESSION['message'] = $request->input('message');
-
-        dd($_SESSION);
-        return view('auth.login');
-    }
 }

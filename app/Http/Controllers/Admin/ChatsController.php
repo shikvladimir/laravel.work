@@ -17,7 +17,9 @@ class ChatsController extends Controller
     public function index()
     {
         $users = User::get();
-        return view('admin.chats.chats', compact('users'));
+        $chatUser = Session::get('chatUser');
+        $chatAdmin = Session::get('chatAdmin');
+        return view('admin.chats.chats', compact('users', 'chatUser','chatAdmin'));
     }
 
     /**
@@ -33,21 +35,39 @@ class ChatsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        session_start();
+
+        $chatUser = Session::get('chatUser', []);
+//        $u_message = $request->input('u_message');
+//        $chatUser['u_message'] = $u_message;
+//        array_push($chatUser, $u_message);
+//        Session::put('chatUser', $chatUser);
+
+
+        $chatAdmin = Session::get('chatAdmin', []);
+        $a_message = $request->input('a_message');
+        $chatAdmin['a_message'] = $a_message;
+        array_push($chatAdmin, $a_message);
+        Session::put('chatAdmin', $chatAdmin);
+
+
+        return view('admin.chats.chats', compact('chatUser','chatAdmin'));
+
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * //     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
         //
     }
@@ -55,7 +75,7 @@ class ChatsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -66,8 +86,8 @@ class ChatsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -78,7 +98,7 @@ class ChatsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

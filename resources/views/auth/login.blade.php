@@ -84,7 +84,8 @@
                             <label class="fw-bold">
                                 Пароль
                             </label>
-                            <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Пароль">
+                            <input type="password" name="password" class="form-control" id="inputPassword"
+                                   placeholder="Пароль">
                         </div>
                         <div class="d-flex justify-content-center">
                             <div class="form-group mt-4">
@@ -110,11 +111,32 @@
 <button class="open-button" onclick="openForm()">Чат</button>
 
 <div class="chat-popup" id="myForm">
-    <form action="{{route('chat')}}" method="get" class="form-container">
+    <form action="{{route('chatsUser')}}" method="post" class="form-container">
+        @csrf
         <h1>Чат</h1>
+        <div class="form-group ">
+            @foreach($chatUser as $item)
+            <div class="form-group d-flex justify-content-start">
+                <lable>User:</lable>
+            </div>
+            <div class="bg-light">
+                <p>{{$item}}</p>
+            </div>
+            @endforeach
+                @foreach($chatAdmin as $item)
+            <div class="form-group d-flex justify-content-end">
+                <lable>Admin:</lable>
+            </div>
+            <div class="bg-light form-group d-flex justify-content-end">
+                <p>{{$item}}</p>
+            </div>
+                @endforeach
 
+
+        </div>
         <label for="msg"><b>Сообщение</b></label>
-        <textarea placeholder="Тип сообщения.." name="message" required></textarea>
+        <textarea placeholder="Ваше сообщения.." name="u_message" required>
+        </textarea>
 
         <button type="submit" class="btn">Отправить</button>
         <button type="button" class="btn cancel" onclick="closeForm()">Закрыть</button>
@@ -123,8 +145,13 @@
 
 
 <style>
-    body {font-family: Arial, Helvetica, sans-serif;}
-    * {box-sizing: border-box;}
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
 
     /* Кнопка, используемая для открытия формы чата - закреплена в нижней части страницы */
     .open-button {
@@ -166,7 +193,7 @@
         border: none;
         background: #f1f1f1;
         resize: none;
-        min-height: 200px;
+        min-height: 100px;
     }
 
     /* Когда текстовая область получит фокус, сделайте что-нибудь */
@@ -183,7 +210,7 @@
         border: none;
         cursor: pointer;
         width: 100%;
-        margin-bottom:10px;
+        margin-bottom: 10px;
         opacity: 0.8;
     }
 
@@ -211,7 +238,7 @@
 
 <!-- Start Footer -->
 {{--<footer class="fixed-bottom bg-dark" id="tempaltemo_footer">--}}
-    <footer class=" fix"  id="tempaltemo_footer">
+<footer class=" fix" id="tempaltemo_footer">
     <div class="w-100 bg-black py-3">
         <div class="container">
             <div class="row pt-2">
