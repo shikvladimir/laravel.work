@@ -203,14 +203,14 @@
                             <p>{{$item}}</p>
                         </div>
                         @endforeach
-                        @foreach($chatAdmin as $item)
+{{--                        @foreach($chatAdmin as $item)--}}
                             <lable>
                                 Admin:
                             </lable>
                         <div class="form-control col-6">
-                            <p>{{$item}}</p>
+{{--                            <p>{{$item}}</p>--}}
                         </div>
-                        @endforeach
+{{--                        @endforeach--}}
                     </div>
                     <label>Сообщение</label>
                     <div>
