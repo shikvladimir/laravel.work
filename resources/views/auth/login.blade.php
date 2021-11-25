@@ -114,28 +114,19 @@
     <form action="{{route('chatsUser')}}" method="post" class="form-container">
         @csrf
         <h1>Чат</h1>
-        <div class="form-group ">
+        <div class="chat-field">
             @foreach($chatUser as $item)
-            <div class="form-group d-flex justify-content-start">
-                <lable>User:</lable>
-            </div>
-            <div class="bg-light">
-                <p>{{$item}}</p>
-            </div>
+                <p class="text-chat">{{$item}}</p>{{--admin--}}
             @endforeach
                 @foreach($chatAdmin as $item)
-            <div class="form-group d-flex justify-content-end">
-                <lable>Admin:</lable>
-            </div>
-            <div class="bg-light form-group d-flex justify-content-end">
-                <p>{{$item}}</p>
+            <div class="form-group d-flex justify-content-end"> {{--admin--}}
+                <p class="text-chat">{{$item}}</p>
             </div>
                 @endforeach
 
-
         </div>
         <label for="msg"><b>Сообщение</b></label>
-        <textarea placeholder="Ваше сообщения.." name="u_message" required>
+        <textarea placeholder="Ваше сообщениe..." name="u_message" required>
         </textarea>
 
         <button type="submit" class="btn">Отправить</button>
@@ -168,8 +159,18 @@
         width: 280px;
     }
 
+    .text-chat {
+        margin: 0;
+    }
+
+    .chat-field{
+        height: 180px;
+        overflow:scroll;
+    }
+
     /* Всплывающий чат - скрыт по умолчанию */
     .chat-popup {
+
         display: none;
         position: fixed;
         bottom: 0;

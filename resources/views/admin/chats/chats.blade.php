@@ -194,6 +194,8 @@
                 <form action="{{route('admin.chats.store')}}" method="post" class="form-container">
                     @csrf
                     <h3>Входящее сообщение: </h3>
+
+
                     @foreach($chatUser as $item)
                     <div class="form-group">
                             <lable>
@@ -202,15 +204,16 @@
                         <div class="form-control col-6">
                             <p>{{$item}}</p>
                         </div>
-                        @endforeach
-{{--                        @foreach($chatAdmin as $item)--}}
+
+                        @foreach($chatAdmin as $item)
                             <lable>
                                 Admin:
                             </lable>
                         <div class="form-control col-6">
-{{--                            <p>{{$item}}</p>--}}
+                            <p>{{$item}}</p>
                         </div>
-{{--                        @endforeach--}}
+                        @endforeach
+                        @endforeach
                     </div>
                     <label>Сообщение</label>
                     <div>

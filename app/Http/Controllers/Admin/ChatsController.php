@@ -14,12 +14,16 @@ class ChatsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        session_start();
+
         $users = User::get();
-        $chatUser = Session::get('chatUser');
-        $chatAdmin = Session::get('chatAdmin');
-        return view('admin.chats.chats', compact('users', 'chatUser','chatAdmin'));
+        $chatUser = Session::get('chatUser',[]);
+        $chatAdmin = Session::get('chatAdmin',[]);
+
+        return view('admin.chats.chats', compact('users', 'chatUser', 'chatAdmin'));
+
     }
 
     /**
@@ -42,19 +46,17 @@ class ChatsController extends Controller
     {
         session_start();
 
-        $chatUser = Session::get('chatUser', []);
-
-
         $chatAdmin = Session::get('chatAdmin', []);
         $a_message = $request->input('a_message');
-//        $chatAdmin['a_message'] = $a_message;
         array_push($chatAdmin, $a_message);
         Session::put('chatAdmin', $chatAdmin);
 
+        $chatUser = Session::get('chatUser', []);
 
-        return view('admin.chats.chats', compact('chatUser','chatAdmin'));
+        return back()->with('admin.chats.chats', compact('chatUser', 'chatAdmin'));
 
 
+//        return view('admin.chats.chats', compact('chatUser'));
     }
 
     /**

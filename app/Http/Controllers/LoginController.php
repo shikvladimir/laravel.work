@@ -22,10 +22,15 @@ class LoginController extends Controller
     public function checkLogin(Request $request)
     {
 
+
+
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'confirmed' => 1])) {
             return view('home.home');
         } else {
-            return view('auth.login');
+            $chatUser = Session::get('chatUser', []);
+            $chatAdmin = Session::get('chatAdmin', []);
+            return view('auth.login',compact('chatUser','chatAdmin'));
+//            return view('auth.login');
         }
 
     }
