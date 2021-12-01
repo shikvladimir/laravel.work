@@ -195,7 +195,7 @@
                     @csrf
                     <h3>Входящее сообщение: </h3>
 
-
+{{--   сброс сессии                 rm -f storage/framework/sessions/*--}}
                     @foreach($chatUser as $item)
                     <div class="form-group">
                             <lable>

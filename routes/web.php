@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\ChatsUserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\mainPriceController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Middleware\CheckAuth;
 use App\Mail\EmailUsers;
@@ -40,6 +41,9 @@ Route::post('registration',[RegistrationController::class, 'stepRegistration'])
 
 Route::post('chatsUser',[ChatsUserController::class, 'chatsUser'])
     ->name('chatsUser');
+
+Route::post('mainPriceUpload',[mainPriceController::class, 'mainPriceUpload'])
+    ->name('mainPriceUpload');
 
 
 Route::prefix('admin')->name('admin.')
