@@ -18,6 +18,19 @@ class Price extends Model
         'price',
         'currency',
         'guarantee',
-        'stock_availability'
+        'article',
+        'number_offers',
+        'description',
+        'maker',
+        'importer',
+        'service_center',
+        'delivery_Minsk',
+        'delivery_RB',
+        'stock',
+        'service_life',
+        'for_business',
+        'credit',
+        'installment_payment',
+        'price_halva'
     ];
 }

@@ -16,21 +16,37 @@ class LoginController extends Controller
         $chatUser = Session::get('chatUser', []);
         $chatAdmin = Session::get('chatAdmin', []);
 
-        return view('auth.login',compact('chatUser','chatAdmin'));
+        $data[] = [
+            'chapter' => 'Данные ожидаются',
+            'manufacturer' => 'Данные ожидаются',
+            'product' => 'Данные ожидаются',
+            'article' => 'Данные ожидаются',
+            'number_offers' => 'Данные ожидаются',
+            'price' => 'Данные ожидаются',
+            'currency' => 'Данные ожидаются',
+            'description' => 'Данные ожидаются',
+            'maker' => 'Данные ожидаются',
+            'importer' => 'Данные ожидаются',
+            'service_center' => 'Данные ожидаются',
+            'guarantee' => 'Данные ожидаются',
+            'delivery_Minsk' => 'Данные ожидаются',
+            'delivery_RB' => 'Данные ожидаются',
+            'stock_availability' => 'Данные ожидаются'
+        ];
+
+        return view('auth.login',compact('chatUser','chatAdmin','data'));
     }
 
     public function checkLogin(Request $request)
     {
-
-
-
+        $data=[];
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'confirmed' => 1])) {
-            return view('home.home');
+            return redirect('/');
         } else {
             $chatUser = Session::get('chatUser', []);
             $chatAdmin = Session::get('chatAdmin', []);
-            return view('auth.login',compact('chatUser','chatAdmin'));
-//            return view('auth.login');
+
+            return view('auth.login',compact('chatUser','chatAdmin','data'));
         }
 
     }
@@ -44,6 +60,7 @@ class LoginController extends Controller
         ]);
 
         $items = User::create($request->all());
+
 
         return back()->with('success', 'Product successfully added.');
     }

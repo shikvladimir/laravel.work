@@ -5,25 +5,13 @@ use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\ChatsUserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\mainPriceController;
+use App\Http\Controllers\ProcessingPriceController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Middleware\CheckAuth;
-use App\Mail\EmailUsers;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', [HomeController::class, 'index'])
+//    Route::get('/', [HomeController::class, 'getCourse'])
     ->middleware(CheckAuth::class)
     ->name('home');
 
@@ -42,8 +30,11 @@ Route::post('registration',[RegistrationController::class, 'stepRegistration'])
 Route::post('chatsUser',[ChatsUserController::class, 'chatsUser'])
     ->name('chatsUser');
 
-Route::post('mainPriceUpload',[mainPriceController::class, 'mainPriceUpload'])
-    ->name('mainPriceUpload');
+Route::post('processingPrice',[ProcessingPriceController::class, 'processingPrice'])
+    ->name('processingPrice');
+
+Route::get('processingPrice',[ProcessingPriceController::class, 'getPrice'])
+    ->name('getPrice');
 
 
 Route::prefix('admin')->name('admin.')

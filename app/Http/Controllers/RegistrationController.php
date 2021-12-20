@@ -28,7 +28,7 @@ class RegistrationController extends Controller
 
         User::create($data);
         return redirect()->route('login');
-        return view('auth.login');
+//        return view('auth.login');
     }
 
 }
