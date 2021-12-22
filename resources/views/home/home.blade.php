@@ -17,6 +17,7 @@
         <thead>
         <tr>
             <th scope="col">Раздел</th>
+            <th scope="col">Артикул</th>
             <th scope="col">Производитель</th>
             <th scope="col">Товар</th>
             <th scope="col">Цена</th>
@@ -30,6 +31,7 @@
         <tr>
 
                 <td>{{$value->chapter}}</td>
+                <td>{{$value->article}}</td>
                 <td>{{$value->manufacturer}}</td>
                 <td>{{$value->product}}</td>
                 <td>{{$value->price}}</td>
