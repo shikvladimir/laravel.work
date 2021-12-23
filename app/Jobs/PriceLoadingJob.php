@@ -72,7 +72,7 @@ class PriceLoadingJob implements ShouldQueue
             $price_halva = $param[19];
 
 
-            $go = Price::create([
+            Price::create([
                 'chapter' => $chapter,
                 'manufacturer' => $manufacturer,
                 'product' => $product,
