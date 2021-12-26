@@ -52,7 +52,8 @@ class HomeController extends Controller
             echo("Ошибка соединения с почтой - " . $mail_login);
             exit;
         } else {
-            $message_id = imap_search($connection, 'FROM "iosifxo@yandex.ru"');
+//            $message_id = imap_search($connection, 'FROM "iosifxo@yandex.ru"');
+            $message_id = imap_search($connection, 'SINCE "' . date('d-M-Y', strtotime("-3 day")) . '" FROM "iosifxo@yandex.ru"');
             $uniq_ids = [];
             $mails = [];
 
@@ -114,23 +115,19 @@ class HomeController extends Controller
                     if ($attachments[$i]['is_attachment']) {
                         $attachments[$i]['attachment'] = imap_fetchbody($connection, $uniq_number_element, $i + 1);
 
-//                        if ($structure->parts[$i]->encoding == 3) { // 3 = BASE64
-//                            $attachments[$i]['attachment'] = base64_decode($attachments[$i]['attachment']);
-//                        } elseif ($structure->parts[$i]->encoding == 4) { // 4 = QUOTED-PRINTABLE
-//                            $attachments[$i]['attachment'] = quoted_printable_decode($attachments[$i]['attachment']);
-//                        }
+                        if ($structure->parts[$i]->encoding == 3) { // 3 = BASE64
+                            $attachments[$i]['attachment'] = base64_decode($attachments[$i]['attachment']);
+                        } elseif ($structure->parts[$i]->encoding == 4) { // 4 = QUOTED-PRINTABLE
+                            $attachments[$i]['attachment'] = quoted_printable_decode($attachments[$i]['attachment']);
 
+                        }
                     }
+                    file_put_contents($_SERVER['DOCUMENT_ROOT'] ."/../storage/app/public/price_serg/" . iconv("utf-8", "cp1251", $attachments[$i]['name']), $attachments[$i]['attachment']);
                 }
-                $mypath = '/tmp/';
-                foreach ($attachments as $attachment) {
-                    file_put_contents( $mypath . $attachment['name'], $attachment['attachment']);
-                }
-//                dd($attachments);
+
             }
 
         }
-
 
         return view('home.home', compact('data', 'datas'));
     }
