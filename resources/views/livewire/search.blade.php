@@ -70,7 +70,7 @@
 
         /* стили модального окна */
         .popup {
-            top: -100%;
+            top: -50%;
             right: 0;
             left: 50%;
             font-size: 14px;

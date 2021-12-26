@@ -15,6 +15,9 @@ Route::get('/', [HomeController::class, 'index'])
     ->middleware(CheckAuth::class)
     ->name('home');
 
+Route::post('/',[HomeController::class, 'pullPriceList'])
+    ->name('pullPriceList');
+
 Route::get('login',[LoginController::class, 'login'])
     ->name('login');
 

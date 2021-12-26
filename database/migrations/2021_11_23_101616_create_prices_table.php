@@ -17,7 +17,7 @@ class CreatePricesTable extends Migration
             $table->id();
             $table->string('chapter', 100)->nullable();
             $table->string('manufacturer', 100)->nullable();
-            $table->string('product', 50)->nullable();
+            $table->string('product', 100)->nullable();
             $table->string('article', 50)->nullable();
             $table->integer('number_offers')->nullable(false);//
             $table->longText('price')->nullable(false);//

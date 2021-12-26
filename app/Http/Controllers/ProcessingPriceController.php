@@ -26,21 +26,20 @@ class ProcessingPriceController extends Controller
         Storage::disk('public')
             ->putFileAs('', $fileCSV, 'price_positions.csv');
 
+
         PriceLoadingJob::dispatch('file')->onQueue('price');
 
         return redirect('/');
     }
 
 
-
-
     public function getPrice()
     {
-        $datas = DB::table('prices')->get();// через модель
+        $datas = Price::paginate(100);
         $data = [];
         foreach ($datas as $key => $value) {
             $data[] = $value;
         }
-        return view('home.home', compact('data'));
+        return view('home.home', compact('data', 'datas'));
     }
 }
