@@ -76,12 +76,16 @@ class HomeController extends Controller
 
             $retailer = array_search("iosifxo@yandex.ru", $comb_arr);
             $items_retailer = imap_fetch_overview($connection, $retailer, FT_UID);
+
+            foreach ($items_retailer as $item_ret) {
+                $uniq_number_element = $item_ret->msgno;
+            }
+
             $structure = imap_fetchstructure($connection, $uniq_id, FT_UID);
-//dd($retailer);
 
             $attachments = [];
-            if(isset($structure->parts) && count($structure->parts)) {
-                for($i = 0; $i < count($structure->parts); $i++) {
+            if (isset($structure->parts) && count($structure->parts)) {
+                for ($i = 0; $i < count($structure->parts); $i++) {
                     $attachments[$i] = [
                         'is_attachment' => false,
                         'filename' => '',
@@ -89,52 +93,40 @@ class HomeController extends Controller
                         'attachment' => ''
                     ];
 
-                    if($structure->parts[$i]->ifdparameters) {
-                        foreach($structure->parts[$i]->dparameters as $object) {
-                            if(strtolower($object->attribute) == 'filename') {
+                    if ($structure->parts[$i]->ifdparameters) {
+                        foreach ($structure->parts[$i]->dparameters as $object) {
+                            if (strtolower($object->attribute) == 'filename') {
                                 $attachments[$i]['is_attachment'] = true;
                                 $attachments[$i]['filename'] = $object->value;
                             }
                         }
                     }
 
-                    if($structure->parts[$i]->ifparameters) {
-                        foreach($structure->parts[$i]->parameters as $object) {
-                            if(strtolower($object->attribute) == 'name') {
+                    if ($structure->parts[$i]->ifparameters) {
+                        foreach ($structure->parts[$i]->parameters as $object) {
+                            if (strtolower($object->attribute) == 'name') {
                                 $attachments[$i]['is_attachment'] = true;
                                 $attachments[$i]['name'] = $object->value;
                             }
                         }
                     }
 
-                    if($attachments[$i]['is_attachment']) {
-                        $attachments[$i]['attachment'] = imap_fetchbody($connection, FT_UID, $i+1);
-//                        if($structure->parts[$i]->encoding == 3) { // 3 = BASE64
-                            $attachments[$i]['attachment'] = base64_decode($attachments[$i]['attachment']);
-//                        }
-//                        elseif($structure->parts[$i]->encoding == 4) { // 4 = QUOTED-PRINTABLE
+                    if ($attachments[$i]['is_attachment']) {
+                        $attachments[$i]['attachment'] = imap_fetchbody($connection, $uniq_number_element, $i + 1);
+
+//                        if ($structure->parts[$i]->encoding == 3) { // 3 = BASE64
+//                            $attachments[$i]['attachment'] = base64_decode($attachments[$i]['attachment']);
+//                        } elseif ($structure->parts[$i]->encoding == 4) { // 4 = QUOTED-PRINTABLE
 //                            $attachments[$i]['attachment'] = quoted_printable_decode($attachments[$i]['attachment']);
 //                        }
+
                     }
                 }
-                dd($attachments);
-            }
-
-
-
-
-
-
-
-
-            dd($structure);
-
-            foreach ($items_retailer as $obj) {
-                if ($obj->subject == "Price") {
-                    $structure = imap_fetchstructure($connection, $uniq_id, FT_UID);
+                $mypath = '/tmp/';
+                foreach ($attachments as $attachment) {
+                    file_put_contents( $mypath . $attachment['name'], $attachment['attachment']);
                 }
-
-                dd($structure);
+//                dd($attachments);
             }
 
         }
