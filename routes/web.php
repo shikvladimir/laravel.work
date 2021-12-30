@@ -1,5 +1,6 @@
 <?php
 
+use App\Helpers\SavePriceNereida;
 use App\Http\Controllers\Admin\ChatsController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\ChatsUserController;
@@ -17,6 +18,9 @@ Route::get('/', [HomeController::class, 'index'])
 
 Route::post('/',[HomeController::class, 'pullPriceList'])
     ->name('pullPriceList');
+
+//Route::post('/',[SavePriceNereida::class, 'pullPriceList']);
+//    ->name('pullPriceList');
 
 Route::get('login',[LoginController::class, 'login'])
     ->name('login');

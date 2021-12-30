@@ -10,7 +10,7 @@
             <button class="btn-success" type="submit">Отправить</button>
         </form>
 
-        <form action="{{route('pullPriceList')}}" method="post">
+        <form action="{{route('pullPriceList','')}}" method="post">
             @csrf
             <button class="btn-success" type="submit">Стянуть прайсы от поставщиков</button>
         </form>

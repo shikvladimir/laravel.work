@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Price;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Helpers\SavePrices\SavePriceSerg;
+use App\Helpers\SavePrices\SavePriceNereida;
+use App\Helpers\SavePrices\SavePriceSota;
 
 class HomeController extends Controller
 {
@@ -33,8 +37,8 @@ class HomeController extends Controller
 
     }
 
-    public function pullPriceList()
-    {
+
+    public function pullPriceList(){
 
         $datas = Price::paginate(100);
         $data = [];
@@ -42,93 +46,15 @@ class HomeController extends Controller
             $data[] = $value;
         }
 
+        $savePrice_serg = (new SavePriceSerg())->pullPriceSerge();
 
-        $mail_login = "vnstore2018@gmail.com";
-        $mail_password = "nxanmishwgniwmmt";
-        $mail_imap = "{imap.gmail.com:993/imap/ssl}INBOX";
+        $savePrice_nereida = (new SavePriceNereida())->pullPriceNereida();
 
-        $connection = imap_open($mail_imap, $mail_login, $mail_password);
-        if (!$connection) {
-            echo("Ошибка соединения с почтой - " . $mail_login);
-            exit;
-        } else {
-//            $message_id = imap_search($connection, 'FROM "iosifxo@yandex.ru"');
-            $message_id = imap_search($connection, 'SINCE "' . date('d-M-Y', strtotime("-3 day")) . '" FROM "iosifxo@yandex.ru"');
-            $uniq_ids = [];
-            $mails = [];
+        $savePrice_sota = (new SavePriceSota())->pullPriceSota();
 
-            foreach ($message_id as $num) {
-                $header = imap_headerinfo($connection, $num);
-                $header = $header->from;
-
-                foreach ($header as $key => $value) {
-                    $mailbox = $value->mailbox;
-                    $host = $value->host;
-                    $email = $mailbox . '@' . $host;
-                }
-
-                $headerArr = imap_headerinfo($connection, $num);
-                $uniq_id = imap_uid($connection, $headerArr->Msgno);
-                $uniq_ids[] = $uniq_id;
-                $mails[] = $email;
-                $comb_arr = array_combine($uniq_ids, $mails);
-                krsort($comb_arr, SORT_NATURAL);
-            }
-
-            $retailer = array_search("iosifxo@yandex.ru", $comb_arr);
-            $items_retailer = imap_fetch_overview($connection, $retailer, FT_UID);
-
-            foreach ($items_retailer as $item_ret) {
-                $uniq_number_element = $item_ret->msgno;
-            }
-
-            $structure = imap_fetchstructure($connection, $uniq_id, FT_UID);
-
-            $attachments = [];
-            if (isset($structure->parts) && count($structure->parts)) {
-                for ($i = 0; $i < count($structure->parts); $i++) {
-                    $attachments[$i] = [
-                        'is_attachment' => false,
-                        'filename' => '',
-                        'name' => '',
-                        'attachment' => ''
-                    ];
-
-                    if ($structure->parts[$i]->ifdparameters) {
-                        foreach ($structure->parts[$i]->dparameters as $object) {
-                            if (strtolower($object->attribute) == 'filename') {
-                                $attachments[$i]['is_attachment'] = true;
-                                $attachments[$i]['filename'] = $object->value;
-                            }
-                        }
-                    }
-
-                    if ($structure->parts[$i]->ifparameters) {
-                        foreach ($structure->parts[$i]->parameters as $object) {
-                            if (strtolower($object->attribute) == 'name') {
-                                $attachments[$i]['is_attachment'] = true;
-                                $attachments[$i]['name'] = $object->value;
-                            }
-                        }
-                    }
-
-                    if ($attachments[$i]['is_attachment']) {
-                        $attachments[$i]['attachment'] = imap_fetchbody($connection, $uniq_number_element, $i + 1);
-
-                        if ($structure->parts[$i]->encoding == 3) { // 3 = BASE64
-                            $attachments[$i]['attachment'] = base64_decode($attachments[$i]['attachment']);
-                        } elseif ($structure->parts[$i]->encoding == 4) { // 4 = QUOTED-PRINTABLE
-                            $attachments[$i]['attachment'] = quoted_printable_decode($attachments[$i]['attachment']);
-
-                        }
-                    }
-                    file_put_contents($_SERVER['DOCUMENT_ROOT'] ."/../storage/app/public/price_serg/" . iconv("utf-8", "cp1251", $attachments[$i]['name']), $attachments[$i]['attachment']);
-                }
-
-            }
-
-        }
-
-        return view('home.home', compact('data', 'datas'));
+        return view('home.home', compact('datas','data','savePrice_serg','savePrice_nereida','savePrice_sota'));
+//        return view('home.home', compact('datas','data','savePrice_sota'));
     }
+
 }
+
