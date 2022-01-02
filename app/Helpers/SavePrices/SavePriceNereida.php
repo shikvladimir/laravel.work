@@ -3,19 +3,11 @@
 namespace App\Helpers\SavePrices;
 
 
-use App\Models\Price;
-
 class SavePriceNereida
 {
 
     public function pullPriceNereida()
     {
-
-        $datas = Price::paginate(100);
-        $data = [];
-        foreach ($datas as $key => $value) {
-            $data[] = $value;
-        }
 
         $mail_login = "vnstore2018@gmail.com";
         $mail_password = "nxanmishwgniwmmt";
@@ -110,7 +102,6 @@ class SavePriceNereida
 
         }
         imap_close($connection);
-        return view('home.home', compact('datas','data'));
     }
 
 }

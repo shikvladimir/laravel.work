@@ -106,15 +106,15 @@
                 <ul class="list-unstyled text-light footer-link-list">
                     <li>
                         <i class="fas fa-map-marker-alt fa-fw"></i>
-                        123 Consectetur at ligula 10660
+                        г.Минск 220047
                     </li>
                     <li>
                         <i class="fa fa-phone fa-fw"></i>
-                        <a class="text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
+                        <a class="text-decoration-none" href="tel:+375 44 711-57-61">+375 44 711-57-61</a>
                     </li>
                     <li>
                         <i class="fa fa-envelope fa-fw"></i>
-                        <a class="text-decoration-none" href="mailto:info@company.com">info@company.com</a>
+                        <a class="text-decoration-none" href="mailto:vnstore2018@gmail.com">vnstore2018@gmail.com</a>
                     </li>
                 </ul>
             </div>
@@ -134,7 +134,6 @@
                 <ul class="list-unstyled text-light footer-link-list">
                     <li><a class="text-decoration-none" href="#">Home</a></li>
                     <li><a class="text-decoration-none" href="#">About Us</a></li>
-                    <li><a class="text-decoration-none" href="#">Shop Locations</a></li>
 
                 </ul>
             </div>

@@ -3,18 +3,10 @@
 namespace App\Helpers\SavePrices;
 
 
-use App\Models\Price;
-
 class SavePriceSerg {
 
     public function pullPriceSerge()
     {
-
-        $datas = Price::paginate(100);
-        $data = [];
-        foreach ($datas as $key => $value) {
-            $data[] = $value;
-        }
 
         $mail_login = "vnstore2018@gmail.com";
         $mail_password = "nxanmishwgniwmmt";
@@ -107,8 +99,6 @@ class SavePriceSerg {
 
         }
         imap_close($connection);
-
-        return view('home.home', compact('datas','data'));
     }
 
 }

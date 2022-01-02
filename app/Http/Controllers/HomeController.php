@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Price;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use App\Helpers\SavePrices\SavePriceSerg;
 use App\Helpers\SavePrices\SavePriceNereida;
 use App\Helpers\SavePrices\SavePriceSota;
+use App\Helpers\SavePrices\SavePriceStt;
 
 class HomeController extends Controller
 {
@@ -52,8 +50,17 @@ class HomeController extends Controller
 
         $savePrice_sota = (new SavePriceSota())->pullPriceSota();
 
-        return view('home.home', compact('datas','data','savePrice_serg','savePrice_nereida','savePrice_sota'));
-//        return view('home.home', compact('datas','data','savePrice_sota'));
+        $savePrice_stt = (new SavePriceStt())->pullPriceStt();
+
+        return view('home.home', compact(
+            'datas',
+            'data',
+            'savePrice_serg',
+            'savePrice_nereida',
+            'savePrice_sota',
+            'savePrice_stt'
+        ));
+
     }
 
 }
