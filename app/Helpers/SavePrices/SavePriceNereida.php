@@ -92,7 +92,7 @@ class SavePriceNereida
                     }
 
                     file_put_contents(
-                        $_SERVER['DOCUMENT_ROOT'] . "/../storage/app/public/price_nereida/".
+                        $_SERVER['DOCUMENT_ROOT'] . "/../prices_for_processing/price_nereida/".
                         imap_utf8($attachments[$i]['name']),
                         $attachments[$i]['attachment']
                     );

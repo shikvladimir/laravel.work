@@ -10,31 +10,34 @@
             <button class="btn-success" type="submit">Отправить</button>
         </form>
 
-        <form action="{{route('pullPriceList','')}}" method="post">
+        <form action="{{route('pullPriceList')}}" method="post">
             @csrf
             <button class="btn-success" type="submit">Стянуть прайсы от поставщиков</button>
         </form>
 
-{{--        {{$ha}}--}}
+
         <div id="primary_nav_wrap">
             <ul>
-                <li><a class="btn-success dropdown-toggle" href="#">Прайсы поставщиков</a>
-                    <ul>
-                        <li class="d-flex justify-content-center mt-2 mb-2">
-                            <label class="form-check-label">
-                                product supplier 1
-                            </label>
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
-                        </li>
-                        <li class="d-flex justify-content-center mt-2 mb-2">
-                            <label class="form-check-label">
-                                product supplier 1
-                            </label>
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
-                        </li>
-                    </ul>
+{{--                <form action="{{route('allPricesLists',[$files->id])}}" method="post">--}}
+                <form action="{{route('allPricesLists')}}" method="post">
 
-                </li>
+                @csrf
+                    <li class="d-flex">
+                        <button class="btn-success dropdown-toggle" type="submit">Обработать прайсы</button>
+                        <ul>
+                            @foreach($files as $key => $file)
+                                <li class="d-flex justify-content-between">
+                                    <label class="form-check-label">
+                                        {{$key}}
+                                        {{$file}}
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" name="isChecked" value="1"
+                                           id="flexCheckIndeterminate">
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
+                </form>
             </ul>
         </div>
     </div>

@@ -240,7 +240,6 @@
                                 Включит аккаунт
                                 <input type="checkbox" name="confirmed" value="Yes" {{$user->check}}>
                                 <input type="submit" name="subconfirmed" value="Сохранить" >
-{{--                                <button type="submit" name="subconfirmed" value="{{$user->id}}">Сохранить</button>--}}
                             </form>
                         </div>
                     </div>

@@ -1,8 +1,9 @@
 <?php
 
-use App\Helpers\SavePriceNereida;
+
 use App\Http\Controllers\Admin\ChatsController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\AllPricesListsController;
 use App\Http\Controllers\ChatsUserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -19,8 +20,14 @@ Route::get('/', [HomeController::class, 'index'])
 Route::post('/',[HomeController::class, 'pullPriceList'])
     ->name('pullPriceList');
 
-//Route::post('/',[SavePriceNereida::class, 'pullPriceList']);
-//    ->name('pullPriceList');
+Route::post('allPricesLists',[AllPricesListsController::class, 'allPricesLists'])
+    ->name('allPricesLists');
+
+Route::post('processingPrice',[ProcessingPriceController::class, 'processingPrice'])
+    ->name('processingPrice');
+
+Route::get('processingPrice',[ProcessingPriceController::class, 'getPrice'])
+    ->name('getPrice');
 
 Route::get('login',[LoginController::class, 'login'])
     ->name('login');
@@ -37,11 +44,7 @@ Route::post('registration',[RegistrationController::class, 'stepRegistration'])
 Route::post('chatsUser',[ChatsUserController::class, 'chatsUser'])
     ->name('chatsUser');
 
-Route::post('processingPrice',[ProcessingPriceController::class, 'processingPrice'])
-    ->name('processingPrice');
 
-Route::get('processingPrice',[ProcessingPriceController::class, 'getPrice'])
-    ->name('getPrice');
 
 
 Route::prefix('admin')->name('admin.')

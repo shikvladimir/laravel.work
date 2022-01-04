@@ -90,7 +90,7 @@ class SavePriceSota
                     }
 
                     file_put_contents(
-                        $_SERVER['DOCUMENT_ROOT'] ."/../storage/app/public/price_sota/" .
+                        $_SERVER['DOCUMENT_ROOT'] ."/../prices_for_processing/price_sota/" .
                         iconv('windows-1251//IGNORE', 'UTF-8//IGNORE',$attachments[$i]['name']),
                         $attachments[$i]['attachment']
                     );

@@ -89,7 +89,7 @@ class SavePriceSerg {
 
                     }
                     file_put_contents(
-                        $_SERVER['DOCUMENT_ROOT'] ."/../storage/app/public/price_serg/" .
+                        $_SERVER['DOCUMENT_ROOT'] ."/../prices_for_processing/price_serg/" .
                         iconv('windows-1251//IGNORE', 'UTF-8//IGNORE',$attachments[$i]['name']),
                         $attachments[$i]['attachment']
                     );
