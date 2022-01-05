@@ -31,7 +31,7 @@
                                         {{$key}}
                                         {{$file}}
                                     </label>
-                                    <input class="form-check-input" type="checkbox" name="isChecked" value="1"
+                                    <input class="form-check-input" type="checkbox" name="isChecked[]" value="{{$key}}"
                                            id="flexCheckIndeterminate">
                                 </li>
                             @endforeach
