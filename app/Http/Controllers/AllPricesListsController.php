@@ -25,43 +25,40 @@ class AllPricesListsController extends Controller
             }
         }
 
-        for ($i=1;$i<=count($working_prices);$i++){
-            dump($i);
-        }
-//        dump($i);
-die();
         foreach ($working_prices as $key => $working_price) {
-            if ($working_price == "price_sota")
-            {
+            if ($working_price == "price_sota") {
                 $price_sota = (new Price_sota())->pars();
-            } elseif
-            ($working_price == "price_stt")
-            {
+            } else {
+                $price_sota = "";
+            }
+
+            if ($working_price == "price_stt") {
                 $price_stt = (new Price_stt())->pars();
-            }elseif
-            ($working_price == "price_serg")
-            {
+            } else {
+                $price_stt = "";
+            }
+
+            if ($working_price == "price_serg") {
                 $price_serg = (new Price_serg())->pars();
-            }elseif
-            ($working_price == "price_nereida")
-            {
+            } else {
+                $price_serg = "";
+            }
+
+            if ($working_price == "price_nereida") {
                 $price_nereida = (new Price_nereida())->pars();
+            } else {
+                $price_nereida = "";
             }
 
         }
 
 
-
-
-//        $similar = array_intersect($working_prices, $files);
-//        dd($arr);
-
         return view('home.home', compact(
             'files',
             'price_sota',
             'price_stt',
-//            'price_serg',
-//            'price_nereida'
+            'price_serg',
+            'price_nereida'
         ));
     }
 }
