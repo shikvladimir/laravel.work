@@ -23,7 +23,7 @@
 
                 @csrf
                     <li class="d-flex">
-                        <button class="btn-success dropdown-toggle" type="submit">Обработать прайсы</button>
+                        <button class="btn-success dropdown-toggle" type="submit" >Обработать прайсы</button>
                         <ul>
                             @foreach($files as $key => $file)
                                 <li class="d-flex justify-content-between">

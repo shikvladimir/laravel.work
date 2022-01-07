@@ -18,18 +18,18 @@ class HomeController extends Controller
 
     public function pullPriceList()
     {
-        $savePrice_serg = (new SavePriceSerg())->pullPriceSerge();
+//        $savePrice_serg = (new SavePriceSerg())->pullPriceSerge();
 
-        $savePrice_nereida = (new SavePriceNereida())->pullPriceNereida();
+//        $savePrice_nereida = (new SavePriceNereida())->pullPriceNereida();
 
-        $savePrice_sota = (new SavePriceSota())->pullPriceSota();
-
+//        $savePrice_sota = (new SavePriceSota())->pullPriceSota();
+//
         $savePrice_stt = (new SavePriceStt())->pullPriceStt();
 
         return view('home.home', compact(
-            'savePrice_serg',
-            'savePrice_nereida',
-            'savePrice_sota',
+//            'savePrice_serg',
+//            'savePrice_nereida',
+//            'savePrice_sota',
             'savePrice_stt'
         ));
 

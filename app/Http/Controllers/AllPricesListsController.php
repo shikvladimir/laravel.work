@@ -52,7 +52,6 @@ class AllPricesListsController extends Controller
 
         }
 
-
         return view('home.home', compact(
             'files',
             'price_sota',
