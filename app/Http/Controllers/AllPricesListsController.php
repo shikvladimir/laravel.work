@@ -52,12 +52,20 @@ class AllPricesListsController extends Controller
 
         }
 
-        return view('home.home', compact(
+        return redirect('/',compact(
             'files',
             'price_sota',
             'price_stt',
             'price_serg',
             'price_nereida'
         ));
+
+//        return view('home.home', compact(
+//            'files',
+//            'price_sota',
+//            'price_stt',
+//            'price_serg',
+//            'price_nereida'
+//        ));
     }
 }

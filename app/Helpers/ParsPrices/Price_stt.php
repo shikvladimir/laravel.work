@@ -14,13 +14,5 @@ class Price_stt
         $data = $spreadsheet->getSheet(0)->toArray();
         dd($data);
 
-
-//        $cells = [];
-//        foreach ($spreadsheet->getWorksheetIterator() as $data) {
-//
-//            $cells[] = $data->toArray();
-//            dd($cells);
-//
-//        }
     }
 }
