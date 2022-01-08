@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class SendEmail extends Mailable
+class SendEmailUser extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -32,6 +32,6 @@ class SendEmail extends Mailable
     {
         return $this->from('pricman_service@gmail.com', 'PRICEMAN Service ')
             ->subject('Здравствуйте, '.$this->data->name.'!')
-            ->view('auth.emailToUser', ['data' => $this->data]);
+            ->view('auth.mails.emailToUser', ['data' => $this->data]);
     }
 }

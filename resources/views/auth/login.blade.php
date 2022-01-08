@@ -65,7 +65,7 @@
     </div>
 </nav>
 <!-- Close Header -->
-
+@include('flash-message.flash-message')
 <!-- Form -->
 <div class="p-2">
     <div class="p-4">

@@ -3,8 +3,10 @@
 namespace App\Listeners;
 
 use App\Events\EmailToAdmin;
+use App\Mail\SendEmailAdmin;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Mail;
 
 class EmailToAdminNotification
 {
@@ -26,6 +28,6 @@ class EmailToAdminNotification
      */
     public function handle(EmailToAdmin $event)
     {
-//        $event->emailAdmin
+        Mail::to('vnstore2018@gmail.com')->send(new SendEmailAdmin($event->data));
     }
 }

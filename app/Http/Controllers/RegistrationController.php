@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\EmailToAdmin;
 use App\Events\EmailToUser;
 use App\Http\Requests\UserRegistrationRequest;
-use App\Mail\SendEmail;
+use App\Mail\SendEmailUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -37,11 +37,11 @@ class RegistrationController extends Controller
         $data->name = $request->name;
         $data->email = $request->email;
 
-
+        event(new EmailToAdmin($data));
         event(new EmailToUser($data));
 
         return redirect()->route('login')
-            ->with('success', 'Ваше сообщение успешно отправлено');
+            ->with('success', 'Ваше сообщение успешно отправлено!');
 //        return view('auth.login');
     }
 

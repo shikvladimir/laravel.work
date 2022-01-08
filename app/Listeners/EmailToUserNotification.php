@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\EmailToUser;
-use App\Mail\SendEmail;
+use App\Mail\SendEmailUser;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
@@ -28,6 +28,6 @@ class EmailToUserNotification
      */
     public function handle(EmailToUser $event)
     {
-        Mail::to($event->data->email)->send(new SendEmail($event->data));
+        Mail::to($event->data->email)->send(new SendEmailUser($event->data));
     }
 }
