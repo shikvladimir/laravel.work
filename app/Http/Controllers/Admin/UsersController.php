@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\EmailToUserConfirmation;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
+use stdClass;
 
 class UsersController extends Controller
 {
@@ -46,6 +46,7 @@ class UsersController extends Controller
             $id = $keu;
         }
         $data = User::find($id);
+
         if (isset($_POST['confirmed']) &&
             $_POST['confirmed'] == 'Yes') {
             $data->confirmed = 1;
@@ -54,6 +55,13 @@ class UsersController extends Controller
         }
 
         $data->save();
+
+        if($data->confirmed == 1){
+            $data = new stdClass();
+            $data->email = User::query()->find($id)->getAttribute('email');
+
+            event(new EmailToUserConfirmation($data));
+        }
 
         return redirect()->back();
 

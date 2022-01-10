@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use App\Events\EmailToAdmin;
 use App\Events\EmailToUser;
+use App\Events\EmailToUserConfirmation;
 use App\Listeners\EmailToAdminNotification;
+use App\Listeners\EmailToUserConfirmationNotification;
 use App\Listeners\EmailToUserNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -27,6 +29,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         EmailToUser::class => [
             EmailToUserNotification::class,
+        ],
+        EmailToUserConfirmation::class => [
+            EmailToUserConfirmationNotification::class,
         ],
     ];
 
