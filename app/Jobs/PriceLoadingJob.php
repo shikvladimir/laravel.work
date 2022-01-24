@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
+use function PHPUnit\Framework\isEmpty;
 
 class PriceLoadingJob implements ShouldQueue
 {
@@ -36,6 +37,10 @@ class PriceLoadingJob implements ShouldQueue
      */
     public function handle()
     {
+        $table = Price::get();
+        if (!empty($table)) {
+            Price::query()->delete();
+        }
 
         $this->file = Storage::get('/public/price_positions.csv');
         $str = str_replace("\r\n", "|", $this->file);

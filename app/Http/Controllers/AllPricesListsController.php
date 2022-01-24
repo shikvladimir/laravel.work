@@ -25,6 +25,11 @@ class AllPricesListsController extends Controller
             }
         }
 
+        $price_sota = null;
+        $price_stt = null;
+        $price_serg = null;
+        $price_nereida = null;
+
         foreach ($working_prices as $key => $working_price) {
             if ($working_price == "price_sota") {
                 $price_sota = (new Price_sota())->pars();
@@ -49,15 +54,15 @@ class AllPricesListsController extends Controller
             } else {
                 $price_nereida = "";
             }
-
         }
+
 
         return redirect('/',compact(
             'files',
             'price_sota',
             'price_stt',
             'price_serg',
-            'price_nereida'
+            'price_nereida',
         ));
 
 //        return view('home.home', compact(

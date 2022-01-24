@@ -42,22 +42,6 @@
         </div>
     </div>
 
-    {{--    <div class="btn-group">--}}
-    {{--        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuClickableInside" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">--}}
-    {{--            Кликабельно внутри--}}
-    {{--        </button>--}}
-    {{--        <ul class="dropdown-menu" aria-labelledby="dropdownMenuClickableInside">--}}
-    {{--            <li><a class="dropdown-item" href="#">Элемент меню</a></li>--}}
-    {{--            <li><a class="dropdown-item" href="#">Элемент меню</a></li>--}}
-    {{--            <li><a class="dropdown-item" href="#">Элемент меню</a></li>--}}
-    {{--        </ul>--}}
-    {{--    </div>--}}
-
-
-
-
-
-
 
     <table class="table table-dark table-striped">
         <thead>
