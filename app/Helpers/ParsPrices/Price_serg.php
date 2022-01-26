@@ -37,32 +37,29 @@ class Price_serg
             } else {
                 $value[0] = explode(' ', $value[0]);
                 $productPrice[] = $value;
+            }
+        }
+        $arrWithProduct = [];
+        $name_product_from_price = null;
+        $name_product_from_db = null;
+        foreach ($productPrice as $keyPrice => $productFromPrice) {
+            for ($countPrice = count($productFromPrice), $q = 0; $q < $countPrice; $q++) {
+                if (is_array($productFromPrice[$q])) {
+                    foreach ($productFromPrice[$q] as $k => $name_product_from_price) {
 
-                $one = null;
-                $two = null;
-                foreach ($productPrice as $keyPrice => $productFromPrice) {
-                    for ($countPrice = count($productFromPrice), $q = 0; $q < $countPrice; $q++) {
-                        if (is_array($productFromPrice[$q])) {
-                            $one=$productFromPrice[$q][3];
+                            $products_db_product = Price::pluck('product')->toArray();
+                            for ($arrCount = count($products_db_product), $i = 0; $i < $arrCount; $i++) {
+                                $product_product_from_db = $products_db_product[$i];
+                                if ($product_product_from_db == $name_product_from_price) {
+                                    $arrWithProduct[] = $product_product_from_db;
+                                }
+                            }
                         }
                     }
                 }
-
-                $products_db = Price::pluck('product')->toArray();
-                for ($arrCount = count($products_db), $i = 0; $i < $arrCount; $i++) {
-                    $two = $products_db[$i];
-                    dump($two);
-                }
-
-                dd(1);
-
-                if($one == $two ){
-                    dump($one);
-                }else{
-                    dd('false');
-                }
-
             }
+            dd($arrWithProduct);
+
         }
-    }
+
 }
