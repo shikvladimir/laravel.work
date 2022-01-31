@@ -5,7 +5,6 @@ namespace App\Helpers\ParsPrices;
 
 
 use App\Models\Price;
-use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Reader\Xls;
 
@@ -40,26 +39,52 @@ class Price_serg
             }
         }
         $arrWithProduct = [];
-        $name_product_from_price = null;
-        $name_product_from_db = null;
+        $d = [];
         foreach ($productPrice as $keyPrice => $productFromPrice) {
             for ($countPrice = count($productFromPrice), $q = 0; $q < $countPrice; $q++) {
                 if (is_array($productFromPrice[$q])) {
-                    foreach ($productFromPrice[$q] as $k => $name_product_from_price) {
 
-                            $products_db_product = Price::pluck('product')->toArray();
-                            for ($arrCount = count($products_db_product), $i = 0; $i < $arrCount; $i++) {
-                                $product_product_from_db = $products_db_product[$i];
-                                if ($product_product_from_db == $name_product_from_price) {
-                                    $arrWithProduct[] = $product_product_from_db;
-                                }
+
+                    $products_db_product = Price::pluck('product')->toArray();
+                    for ($arrCount = count($products_db_product), $i = 0; $i < $arrCount; $i++) {
+                        $product_product_from_db = $products_db_product[$i];
+
+                        if (isset($productFromPrice[$q][3])) {
+                            if ($product_product_from_db == $productFromPrice[$q][3]) {
+                                $arrWithProduct[] = $product_product_from_db;
                             }
                         }
+                        if (isset($productFromPrice[$q][2])) {
+                            if ($product_product_from_db == $productFromPrice[$q][2]) {
+                                $arrWithProduct[] = $product_product_from_db;
+                            }
+                        }
+                        if (isset($productFromPrice[$q][1])) {
+                            if ($product_product_from_db == $productFromPrice[$q][1]) {
+                                $arrWithProduct[] = $product_product_from_db;
+                            }
+                        }
+                        if (isset($productFromPrice[$q][1]) && isset($productFromPrice[$q][2])) {
+                            if ($product_product_from_db == $productFromPrice[$q][1].$productFromPrice[$q][2]) {
+                                $arrWithProduct[] = $product_product_from_db;
+                            }
+                        }
+                        if (isset($productFromPrice[$q][2]) && isset($productFromPrice[$q][3])) {
+                            if ($product_product_from_db == $productFromPrice[$q][2].$productFromPrice[$q][3]) {
+                                $arrWithProduct[] = $product_product_from_db;
+                            }
+                        }
+
                     }
+
                 }
             }
-            dd($arrWithProduct);
-
         }
+
+
+        dd($arrWithProduct);
+
+
+    }
 
 }
