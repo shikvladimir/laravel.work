@@ -11,6 +11,7 @@ class ChatsUserController extends Controller
     {
         session_start();
 
+        $chat = Session::get('chat',[]);
         $chatUser = Session::get('chatUser', []);
         $u_message = $request->input('u_message');
         array_push($chatUser, $u_message);

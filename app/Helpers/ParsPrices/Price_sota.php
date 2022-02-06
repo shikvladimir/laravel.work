@@ -34,16 +34,14 @@ class Price_sota
         $data = $spreadsheet->getSheet(1)->toArray();
 
         $arrProduct = [];
-        $arrProduct2 = [];
-
         for ($d = 0; $d < count($data); $d++) {
-            $article_db = $data[$d][2];
+            $article_price = $data[$d][2];
 
-            if ($article_db != null) {
+            if ($article_price != null) {
                 $article_db_product = Price::pluck('article')->toArray();
                 for ($i = 0; $i < count($article_db_product); $i++) {
 
-                    if ($article_db == $article_db_product[$i]) {
+                    if ($article_price == $article_db_product[$i]) {
                         $arrProduct[] = $article_db_product[$i];
 
                     }
