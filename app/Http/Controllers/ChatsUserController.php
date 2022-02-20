@@ -40,7 +40,6 @@ class ChatsUserController extends Controller
             foreach ($user_name as $item){
                 $any_user_name = $item->any_user_name;
             }
-//            dd($any_user_name);
         }else{
             dd('No true');
         }
@@ -55,7 +54,6 @@ class ChatsUserController extends Controller
             foreach ($chat as $item){
                 $chat_name = $item->chat_name;
             }
-            dd($chat_name);
         }else{
             dd('No true');
         }

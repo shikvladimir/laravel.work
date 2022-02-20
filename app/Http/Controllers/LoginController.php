@@ -17,6 +17,8 @@ class LoginController extends Controller
 
         session_start();
 
+        $any_user_id = Any_users::query()->get();
+
         $session = Any_users::query()->get('session_id');
         $session_id = null;
         foreach ($session as $value) {
@@ -26,12 +28,12 @@ class LoginController extends Controller
 //        dd($_SESSION);
         if(!isset($_SESSION['session_id'])){
             $content = [];
-            return view('auth.login', compact('content'));
+            return view('auth.login', compact('content','any_user_id'));
         }
 
         if($session_id != $_SESSION['session_id']){
             $content = [];
-            return view('auth.login', compact('content'));
+            return view('auth.login', compact('content','any_user_id'));
         }
 
 
@@ -50,7 +52,8 @@ class LoginController extends Controller
             ->get();
 
 
-        return view('auth.login', compact('content'));
+
+        return view('auth.login', compact('content','any_user_id'));
 
     }
 

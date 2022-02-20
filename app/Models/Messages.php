@@ -13,10 +13,4 @@ class Messages extends Model
         'content',
     ];
 
-
-//    public function getTextAttribute(){
-//        if($this->attributes['chat_id'] == 1){
-//            return 'hidden';
-//        }
-//    }
 }
