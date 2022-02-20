@@ -115,20 +115,29 @@
         @csrf
         <h1>Чат</h1>
         <div class="chat-field">
-            @foreach($chatUser as $item)
-                <p class="text-chat">{{$item}}</p>{{--admin--}}
+            @foreach($content as $item)
+                <p class="text-chat">{{$item->content}}</p>
             @endforeach
-                @foreach($chatAdmin as $item)
-            <div class="form-group d-flex justify-content-end"> {{--admin--}}
-                <p class="text-chat">{{$item}}</p>
-            </div>
-                @endforeach
 
         </div>
-        <label for="msg"><b>Сообщение</b></label>
-        <textarea placeholder="Ваше сообщениe..." name="u_message" required>
-        </textarea>
+        <input class="border_for_input"
+                              @foreach($content as $item)
+                              type="{{$item->text}}"
+                              @endforeach
+{{--               type="text"--}}
+               name="any_user_name"
+               placeholder="Ваше Имя">
 
+        <input class="border_for_input"
+               {{--               @foreach($content as $item)--}}
+               {{--               type="{{$item->text}}"--}}
+               {{--               @endforeach--}}
+               type="text"
+               name="chat_name"
+               placeholder="Тема Сообщения">
+        <textarea type="text"
+                  name="content"
+                  placeholder="Введите Сообщение..." required></textarea>
         <button type="submit" class="btn">Отправить</button>
         <button type="button" class="btn cancel" onclick="closeForm()">Закрыть</button>
     </form>
@@ -142,6 +151,13 @@
 
     * {
         box-sizing: border-box;
+    }
+
+    .border_for_input {
+        border: none;
+        background: #f1f1f1;
+        width: 100%;
+        margin: 5px;
     }
 
     /* Кнопка, используемая для открытия формы чата - закреплена в нижней части страницы */
@@ -163,9 +179,9 @@
         margin: 0;
     }
 
-    .chat-field{
+    .chat-field {
         height: 180px;
-        overflow:scroll;
+        overflow: scroll;
     }
 
     /* Всплывающий чат - скрыт по умолчанию */

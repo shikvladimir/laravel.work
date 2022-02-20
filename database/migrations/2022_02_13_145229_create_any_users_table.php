@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAnyUserTable extends Migration
+class CreateAnyUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateAnyUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('any_user', function (Blueprint $table) {
-            $table->id('any_user_id');
-            $table->string('any_user_name','50');
+        Schema::create('any_users', function (Blueprint $table) {
+            $table->id();
+            $table->string('any_user_name','50')->nullable();
+            $table->string('session_id')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateAnyUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('any_user');
+        Schema::dropIfExists('any_users');
     }
 }
