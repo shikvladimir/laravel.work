@@ -40,9 +40,9 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
     @include('admin.header')
-        <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+    <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
     @include('admin.sidebar')
-        <!-- /.navbar-collapse -->
+    <!-- /.navbar-collapse -->
     </nav>
 
     <div id="page-wrapper">
@@ -52,18 +52,31 @@
             <!-- Page Heading -->
             <div class="row">
                 <h1 class="page-header">
-                    Чаты <small>Сообщения от незарегистрированных пользователей</small>
+                    Чат <small>Чат с пользователем </small>
                 </h1>
             </div>
             <div>
-                @foreach($chats as $item)
-                <ul>
-                    <li>
-                        <h3><a href="{{route('admin.chat.show',$item->id)}}"><i class="fa fa-fw fa-comment"></i>{{$item->chat_name}}</a></h3>
-                    </li>
-                </ul>
+                @foreach($content as $item)
+
+                    <h4>{{$item->content}}</h4><h4>{{$item->any_user_name}}</h4>
+
                 @endforeach
             </div>
+
+
+            <!-- /.row -->
+            <div class="chat-popup bg-light">
+                <form action="{{route('admin.chats.store')}}" method="post" class="form-container">
+                    @csrf
+
+                    <label>Сообщение</label>
+                    <div>
+                        <textarea class="form-control" name="a_message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-info">Отправить</button>
+                </form>
+            </div>
+
 
             <ol class="breadcrumb">
                 <li class="active">
@@ -95,4 +108,5 @@
 </body>
 
 </html>
+
 

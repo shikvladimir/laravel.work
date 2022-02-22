@@ -25,7 +25,7 @@ class Any_users extends Model
             $session_id = $value->session_id;
         }
 
-        if(session_id() == $session_id && isset($this->attributes['any_user_name'])){
+        if(session_id() == $session_id && isset($this->attributes['any_user_name']) && $_SESSION != []){
             return 'hidden';
         }
     }

@@ -1,7 +1,9 @@
 <?php
 
 
+use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\ChatsController;
+use App\Http\Controllers\Admin\Settings\SettingsController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\AllPricesListsController;
 use App\Http\Controllers\ChatsUserController;
@@ -17,41 +19,41 @@ Route::get('/', [HomeController::class, 'index'])
     ->middleware(CheckAuth::class)
     ->name('home');
 
-Route::post('/',[HomeController::class, 'pullPriceList'])
+Route::post('/', [HomeController::class, 'pullPriceList'])
     ->name('pullPriceList');
 
-Route::post('allPricesLists',[AllPricesListsController::class, 'allPricesLists'])
+Route::post('allPricesLists', [AllPricesListsController::class, 'allPricesLists'])
     ->name('allPricesLists');
 
-Route::post('processingPrice',[ProcessingPriceController::class, 'processingPrice'])
+Route::post('processingPrice', [ProcessingPriceController::class, 'processingPrice'])
     ->name('processingPrice');
 
-Route::get('processingPrice',[ProcessingPriceController::class, 'getPrice'])
+Route::get('processingPrice', [ProcessingPriceController::class, 'getPrice'])
     ->name('getPrice');
 
-Route::get('login',[LoginController::class, 'login'])
+Route::get('login', [LoginController::class, 'login'])
     ->name('login');
 
-Route::post('login',[LoginController::class, 'checkLogin'])
+Route::post('login', [LoginController::class, 'checkLogin'])
     ->name('checkLogin');
 
-Route::get('registration',[RegistrationController::class, 'registration'])
+Route::get('registration', [RegistrationController::class, 'registration'])
     ->name('registration');
 
-Route::post('registration',[RegistrationController::class, 'stepRegistration'])
+Route::post('registration', [RegistrationController::class, 'stepRegistration'])
     ->name('stepRegistration');
 
-Route::post('chatsUser',[ChatsUserController::class, 'chatsUser'])
+Route::post('chatsUser', [ChatsUserController::class, 'chatsUser'])
     ->name('chatsUser');
-
-
 
 
 Route::prefix('admin')->name('admin.')
     ->middleware(CheckAuth::class)
-    ->group(function (){
-Route::resources([
-    'users' => UsersController::class,
-    'chats' => ChatsController::class
-]);
-});
+    ->group(function () {
+        Route::resources([
+            'users' => UsersController::class,
+            'chats' => ChatsController::class,
+            'chat' => ChatController::class,
+            'settings' => SettingsController::class
+        ]);
+    });

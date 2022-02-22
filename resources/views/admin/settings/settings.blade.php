@@ -40,43 +40,14 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
     @include('admin.header')
-        <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+    <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
     @include('admin.sidebar')
-        <!-- /.navbar-collapse -->
+    <!-- /.navbar-collapse -->
     </nav>
 
     <div id="page-wrapper">
 
-        <div class="container-fluid">
 
-            <!-- Page Heading -->
-            <div class="row">
-                <h1 class="page-header">
-                    Чаты <small>Сообщения от незарегистрированных пользователей</small>
-                </h1>
-            </div>
-            <div>
-                @foreach($chats as $item)
-                <ul>
-                    <li>
-                        <h3><a href="{{route('admin.chat.show',$item->id)}}"><i class="fa fa-fw fa-comment"></i>{{$item->chat_name}}</a></h3>
-                    </li>
-                </ul>
-                @endforeach
-            </div>
-
-            <ol class="breadcrumb">
-                <li class="active">
-                    <i class="fa fa-fw"></i>
-                </li>
-            </ol>
-            <!-- /.row -->
-
-        </div>
-        <!-- /.container-fluid -->
-
-    </div>
-    <!-- /#page-wrapper -->
 
 </div>
 <!-- /#wrapper -->
@@ -95,4 +66,5 @@
 </body>
 
 </html>
+
 
