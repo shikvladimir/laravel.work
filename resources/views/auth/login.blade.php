@@ -103,8 +103,6 @@
         </div>
     </div>
 </div>
-
-
 <!-- Close Form -->
 
 <!-- Chat -->
@@ -122,7 +120,6 @@
         </div>
         <input class="border_for_input"
                @foreach($any_user_id as $item)
-{{--                   @dd($any_user_id)--}}
                type="{{$item->text}}"
                @endforeach
                name="any_user_name"
@@ -132,7 +129,6 @@
                @foreach($any_user_id as $item)
                type="{{$item->text}}"
                @endforeach
-               {{--               type="text"--}}
                name="chat_name"
                placeholder="Тема Сообщения">
         <textarea type="text"

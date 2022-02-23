@@ -56,9 +56,9 @@
                 </h1>
             </div>
             <div>
-                @foreach($content as $item)
+                @foreach($contentAll as $item)
 
-                    <h4>{{$item->content}}</h4><h4>{{$item->any_user_name}}</h4>
+                    <h4>{{$item->content}}</h4>
 
                 @endforeach
             </div>
@@ -66,12 +66,16 @@
 
             <!-- /.row -->
             <div class="chat-popup bg-light">
-                <form action="{{route('admin.chats.store')}}" method="post" class="form-container">
+                <form action="{{route('admin.chat.store',['chat_id'=>$id])}}" method="post" class="form-container">
                     @csrf
 
                     <label>Сообщение</label>
                     <div>
-                        <textarea class="form-control" name="a_message" required></textarea>
+                        <textarea
+                            class="form-control"
+                            type="text"
+                            name="content"
+                            placeholder="Введите Сообщение..." required></textarea>
                     </div>
                     <button type="submit" class="btn btn-info">Отправить</button>
                 </form>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Any_users;
 use App\Models\Chats;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,7 +18,19 @@ class ChatsController extends Controller
      */
     public function index(Request $request)
     {
-        $chats = Chats::query()->get();
+        $admin_name = Any_users::query()
+            ->select('id')
+            ->where('any_user_name','=','Admin')
+            ->get();
+        $chat_id = null;
+        foreach ($admin_name as $value){
+            $chat_id = $value->id;
+        }
+
+        $chats = Chats::query()
+            ->where('any_user_id','!=',$chat_id)
+            ->get();
+
 
         return view('admin.chats.chats', compact('chats'));
 
@@ -41,11 +54,7 @@ class ChatsController extends Controller
      */
     public function store(Request $request)
     {
-
-        return back()->with('admin.chats.chats');
-
-
-//        return view('admin.chats.chats', compact('chatUser'));
+        //
     }
 
     /**

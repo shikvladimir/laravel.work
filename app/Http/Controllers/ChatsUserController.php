@@ -74,6 +74,7 @@ class ChatsUserController extends Controller
 
         $chat = Chats::query()->updateOrCreate([
             'chat_name' => $chat_name,
+
             'any_user_id'=>$any_user_id
         ]);
         $chat_id = $chat->id;

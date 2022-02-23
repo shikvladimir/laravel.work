@@ -18,14 +18,10 @@ class LoginController extends Controller
 
         $any_user_id = Any_users::query()->get();
 
-        $session = Any_users::query()->get('session_id');
         $session_id = null;
-        foreach ($session as $value) {
+        foreach ($any_user_id as $value) {
             $session_id = $value->session_id;
         }
-
-
-//        echo($session_id);
 
 
         if (empty($_SESSION['session_id']) || !isset($_SESSION['session_id'])) {
@@ -39,34 +35,23 @@ class LoginController extends Controller
         }
 
 
-        $chat = Chats::query()->get('id');
-        $one_chat = null;
-        foreach ($chat as $value) {
-            $one_chat = $value->id;
+        $chat = Any_users::query()
+            ->select('chat_name')
+            ->join('chats','any_users.id','=','chats.any_user_id')
+            ->where('any_users.session_id','=',session_id())
+            ->get();
+        $chat_name = null;
+        foreach ($chat as $item){
+            $chat_name = $item->chat_name;
         }
-dump($_SESSION) ;
-
 
         $content = Messages::query()
-            ->join('chats','chats.id','=','messages.chat_id')
-            ->join('any_users','any_users.id','=','chats.any_user_id')
-            ->select('content', 'chat_id','session_id')
-            ->groupBy('content', 'chat_id','session_id')
-            ->having('chat_id', '=', $one_chat)
+            ->select('messages.content')
+            ->join('chats','messages.chat_id','=','chats.id')
+            ->join('any_users','chats.any_user_id','=','any_users.id')
+            ->where('chats.chat_name','=',$chat_name)
+            ->orderBy('messages.id')
             ->get();
-
-
-
-//        foreach ($session as $i) {
-//            $us[] = $i->any_user_name;
-//        }
-//
-//        foreach ($us as $v) {
-//            if ($_SESSION['any_user_name'] != $v) {
-////                Any_users::query()->where('any_user_name', '=', $v)->delete();
-//            }
-
-//        }
 
 
         return view('auth.login', compact('content', 'any_user_id'));
