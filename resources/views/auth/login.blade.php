@@ -117,7 +117,6 @@
                 <u><h5>{{$item->any_user_name}}:</h5></u>
                 <p class="text-chat">{{$item->content}}</p>
             @endforeach
-
         </div>
         <input class="border_for_input"
                @foreach($any_user_id as $item)
@@ -139,7 +138,6 @@
         <button type="button" class="btn cancel" onclick="closeForm()">Закрыть</button>
     </form>
 </div>
-
 
 <style>
     body {
