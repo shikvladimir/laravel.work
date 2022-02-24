@@ -40,9 +40,9 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
     @include('admin.header')
-        <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+    <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
     @include('admin.sidebar')
-        <!-- /.navbar-collapse -->
+    <!-- /.navbar-collapse -->
     </nav>
 
     <div id="page-wrapper">
@@ -55,15 +55,28 @@
                     Чаты <small>Сообщения от незарегистрированных пользователей</small>
                 </h1>
             </div>
-            <div>
-                @foreach($chats as $item)
-                <ul>
-                    <li>
-                        <h3><a href="{{route('admin.chat.show',$item->id)}}"><i class="fa fa-fw fa-comment"></i>{{$item->chat_name}}</a></h3>
-                    </li>
-                </ul>
-                @endforeach
-            </div>
+
+            <style>
+                .block{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+            </style>
+            @foreach($chats as $item)
+                <div class="block">
+                        <h3><a href="{{route('admin.chat.show',$item->id)}}"><i
+                                    class="fa fa-fw fa-comment"></i>{{$item->chat_name}}</a></h3>
+
+                        <form action="{{route('admin.chat.destroy',$item->id)}}" method="post" class="form-container">
+                            @csrf
+                            @method('delete')
+                            <button class="btn-danger">Удалить чат</button>
+                        </form>
+
+                </div>
+            @endforeach
+
 
             <ol class="breadcrumb">
                 <li class="active">

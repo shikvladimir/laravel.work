@@ -149,6 +149,17 @@ class ChatController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $chat = Chats::query()
+            ->select('chat_name')
+            ->where('id','=',$id)
+            ->get();
+        $chat_name = null;
+        foreach ($chat as $item){
+            $chat_name = $item->chat_name;
+        }
+        Chats::query()->where('chat_name','=',$chat_name)->delete();
+
+
+        return Redirect::back();
     }
 }

@@ -53,7 +53,6 @@ class LoginController extends Controller
             ->orderBy('messages.id')
             ->get();
 
-
         return view('auth.login', compact('content', 'any_user_id'));
 
     }
@@ -64,9 +63,6 @@ class LoginController extends Controller
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'confirmed' => 1])) {
             return redirect('/');
         } else {
-//            $chatUser = Session::get('chatUser', []);
-//            $chatAdmin = Session::get('chatAdmin', []);
-
             return view('auth.login', compact('data'));
         }
 
@@ -81,7 +77,6 @@ class LoginController extends Controller
         ]);
 
         User::query()->create($request->all());
-
 
         return back()->with('success', 'Product successfully added.');
     }
