@@ -114,6 +114,7 @@
         <h1>Чат</h1>
         <div class="chat-field">
             @foreach($content as $item)
+                <u><h5>{{$item->any_user_name}}:</h5></u>
                 <p class="text-chat">{{$item->content}}</p>
             @endforeach
 
@@ -235,6 +236,12 @@
     /* Добавьте некоторые эффекты наведения на кнопки */
     .form-container .btn:hover, .open-button:hover {
         opacity: 1;
+    }
+
+    .block{
+        display: flex;
+        justify-content: start;
+        align-items: center;
     }
 </style>
 

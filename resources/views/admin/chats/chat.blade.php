@@ -55,13 +55,22 @@
                     Чат <small>Чат с пользователем </small>
                 </h1>
             </div>
-            <div>
+            <style>
+                .block{
+                    display: flex;
+                    justify-content: start;
+                    align-items: center;
+                }
+            </style>
+
                 @foreach($contentAll as $item)
+                <div class="block">
+                    <u><h5>{{$item->any_user_name}}:</h5></u>
 
                     <h4>{{$item->content}}</h4>
-
+                </div>
                 @endforeach
-            </div>
+
 
 
             <!-- /.row -->

@@ -107,7 +107,7 @@ class ChatController extends Controller
         }
 
         $contentAll = Messages::query()
-            ->select('messages.content')
+            ->select('messages.content','any_user_name')
             ->join('chats','messages.chat_id','=','chats.id')
             ->join('any_users','chats.any_user_id','=','any_users.id')
             ->where('chats.chat_name','=',$chat_name)
