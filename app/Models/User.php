@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
+use function PHPUnit\Framework\returnArgument;
 
 class User extends Authenticatable
 {
@@ -29,15 +31,19 @@ class User extends Authenticatable
         'photo'
     ];
 
-    public function getPagePhotoAttribute(){
-        if (Storage::exists($this->attributes['photo'])){
-            return(Storage::url($this->attributes['photo']));
+    public function getPagePhotoAttribute()
+    {
+
+        if (Storage::files($this->attributes['photo']) == null) {
+            return (Storage::url($this->attributes['photo']));
         }
         return '/admin/user_photo.png';
+
     }
 
-    public function getCheckAttribute(){
-        if($this->attributes['confirmed'] == 1){
+    public function getCheckAttribute()
+    {
+        if ($this->attributes['confirmed'] == 1) {
             return 'checked';
         }
     }

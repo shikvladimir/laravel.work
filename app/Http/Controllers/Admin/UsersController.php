@@ -57,7 +57,7 @@ class UsersController extends Controller
         $data->save();
 
         if($data->confirmed == 1){
-            $data = new stdClass();
+//            $data = new stdClass();
             $data->email = User::query()->find($id)->getAttribute('email');
 
             event(new EmailToUserConfirmation($data));

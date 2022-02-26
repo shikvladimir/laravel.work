@@ -65,6 +65,7 @@
 
             <!-- /.row -->
             @foreach($users as $user)
+
                 <div class="col-lg-12 bg-transparent">
                     <div class="col-lg-4">
                         <img src="{{$user->pagePhoto}}" width="200" alt="">
