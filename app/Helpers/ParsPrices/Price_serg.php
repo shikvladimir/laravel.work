@@ -40,7 +40,7 @@ class Price_serg
         }
 
         $arrWithProduct = [];
-        $d = [];
+
         foreach ($productPrice as $keyPrice => $productFromPrice) {
             for ($countPrice = count($productFromPrice), $q = 0; $q < $countPrice; $q++) {
                 if (is_array($productFromPrice[$q])) {
@@ -52,28 +52,47 @@ class Price_serg
                         if (isset($productFromPrice[$q][3])) {
                             if ($product_product_from_db == $productFromPrice[$q][3]) {
                                 $arrWithProduct[] = $product_product_from_db;
+
                             }
                         }
                         if (isset($productFromPrice[$q][2])) {
                             if ($product_product_from_db == $productFromPrice[$q][2]) {
                                 $arrWithProduct[] = $product_product_from_db;
+//                                dd($arrWithProduct);
                             }
                         }
                         if (isset($productFromPrice[$q][1])) {
-                            if ($product_product_from_db == $productFromPrice[$q][1]) {
+                            if ($product_product_from_db == $productFromPrice[$q][1] ||
+                                substr_replace($productFromPrice[$q][1],'-',-2,0) == $product_product_from_db ||
+                                substr_replace($productFromPrice[$q][1],'-',-3,0) == $product_product_from_db) {
                                 $arrWithProduct[] = $product_product_from_db;
+
                             }
                         }
                         if (isset($productFromPrice[$q][1]) && isset($productFromPrice[$q][2])) {
-                            if ($product_product_from_db == $productFromPrice[$q][1] . $productFromPrice[$q][2]) {
+                            if ($product_product_from_db == $productFromPrice[$q][1] . $productFromPrice[$q][2] ||
+                                $product_product_from_db == $productFromPrice[$q][1].' '.$productFromPrice[$q][2] ||
+                                $product_product_from_db == $productFromPrice[$q][1].' '.substr_replace($productFromPrice[$q][2],' ',1,0)) {
                                 $arrWithProduct[] = $product_product_from_db;
+//                                dd($arrWithProduct);
                             }
                         }
+
                         if (isset($productFromPrice[$q][2]) && isset($productFromPrice[$q][3])) {
                             if ($product_product_from_db == $productFromPrice[$q][2] . $productFromPrice[$q][3]) {
                                 $arrWithProduct[] = $product_product_from_db;
                             }
+
                         }
+
+                        if (isset($productFromPrice[$q][1]) && isset($productFromPrice[$q][2]) && isset($productFromPrice[$q][3])) {
+                            if ($product_product_from_db == $productFromPrice[$q][1].' '.$productFromPrice[$q][2].' '.$productFromPrice[$q][3] ||
+                                $product_product_from_db == $productFromPrice[$q][1].' '.$productFromPrice[$q][2].' '.str_replace('black','(черный)',$productFromPrice[$q][3])) {
+                                $arrWithProduct[] = $product_product_from_db;
+                            }
+
+                        }
+
                     }
                 }
             }
