@@ -34,7 +34,7 @@ class ProcessingPriceController extends Controller
 
     public function getPrice()
     {
-        $datas = Price::paginate(100);
+        $datas = Price::query()->paginate(100);
         $data = [];
         foreach ($datas as $key => $value) {
             $data[] = $value;

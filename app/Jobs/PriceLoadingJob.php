@@ -37,13 +37,14 @@ class PriceLoadingJob implements ShouldQueue
      */
     public function handle()
     {
-        $table = Price::get();
+        $table = Price::query()->get();
         if (!empty($table)) {
             Price::query()->delete();
         }
 
         $this->file = Storage::get('/public/price_positions.csv');
-        $str = str_replace("\r\n", "|", $this->file);
+//        $str = str_replace("\r\n", "|", $this->file);
+        $str = str_replace("\n", "|", $this->file);
         $newRows = explode('|', $str);
         array_shift($newRows);
         $array = array_diff($newRows, ["", " "]);
@@ -51,15 +52,16 @@ class PriceLoadingJob implements ShouldQueue
 
         foreach ($array as $key => $row) {
             $params[$key] = array_map('trim', explode(';', $row));
-        }
 
+        }
 
         foreach ($params as $param) {
             $chapter = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[0]);
             $manufacturer = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[1]);
             $product = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[2]);
             $article = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[3]);
-            $number_offers = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[4]);
+//            $number_offers = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[4]);
+            $number_offers = $param[4];
             $price = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[5]);
             $currency = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[6]);
             $description = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[7]);
@@ -75,6 +77,7 @@ class PriceLoadingJob implements ShouldQueue
             $stock = $param[17] === '' ? '' : 'run_out_of_stock';
             $installment_payment = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[18]);
             $price_halva = $param[19];
+            $onliner_prime = mb_convert_encoding($param[20], 'UTF-8', 'windows-1251');
 
 
             Price::create([
@@ -98,6 +101,7 @@ class PriceLoadingJob implements ShouldQueue
                 'credit' => $credit,
                 'installment_payment' => $installment_payment,
                 'price_halva' => $price_halva,
+                'onliner_prime' => $onliner_prime,
             ]);
 
         }

@@ -19,19 +19,32 @@ class Price_stt
         $arrProduct = [];
         for ($d = 0; $d < count($data); $d++) {
             $article_from_price = $data[$d][1];
+            $cost_from_price = $data[$d][3];
+
             if ($article_from_price != null) {
                 $article_price = str_replace(' ', '', $article_from_price);
+
 
                 $article_db_product = Price::pluck('article')->toArray();
                 for ($i = 0; $i < count($article_db_product); $i++) {
 
                     $pos = stripos($article_price, $article_db_product[$i]);
                     if ($pos != false && $pos != "") {
-                        $arrProduct[] = $article_db_product[$i];
+                        $arrProduct[] = [$article_db_product[$i],$cost_from_price];
+
+
+                        foreach ($arrProduct as $article) {
+                            if(iconv_strlen($article[0])<5){
+                                unset($article[0]);
+                            }else{
+                                Price::query()->where('article','=',$article[0])->update(['price'=>$article[1]*0.3+$article[1]]);
+                            }
+
+                        }
                     }
                 }
             }
         }
-        dd($arrProduct);
+//        dd($arrProduct);
     }
 }
