@@ -15,22 +15,22 @@ class Price_nereida
         $spreadsheet = IOFactory::load($getFileName);
         $data = $spreadsheet->getSheet(0)->toArray();
 
-        $arrProduct = [];
         for ($d = 0; $d < count($data); $d++) {
             $article_price = $data[$d][4];
+            $price = $data[$d][5];
             $availability = $data[$d][8];
 
+
             if ($article_price != null) {
-                $article_db_product = Price::pluck('article')->toArray();
-                for ($i = 0; $i < count($article_db_product); $i++) {
-
-                    if ($article_price == $article_db_product[$i] && $availability != 'резерв') {
-                        $arrProduct[] = $article_db_product[$i];
-
-                    }
+                if ($availability != 'резерв') {
+                    Price::query()->where('article', '=', $article_price)
+                        ->update(['price' => round($price * 0.3 + $price, 2)]);
+                } else {
+                    Price::query()->where('article', '=', $article_price)
+                        ->update(['price' => '0']);
                 }
             }
         }
-        dd($arrProduct);
     }
+
 }

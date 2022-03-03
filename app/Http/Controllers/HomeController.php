@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\SavePrices\SavePriceSerg;
 use App\Helpers\SavePrices\SavePriceNereida;
+use App\Helpers\SavePrices\SavePriceShik;
 use App\Helpers\SavePrices\SavePriceSota;
 use App\Helpers\SavePrices\SavePriceStt;
 
@@ -23,14 +24,17 @@ class HomeController extends Controller
         $savePrice_nereida = (new SavePriceNereida())->pullPriceNereida();
 
         $savePrice_sota = (new SavePriceSota())->pullPriceSota();
-//
+
         $savePrice_stt = (new SavePriceStt())->pullPriceStt();
+
+        $savePrice_shik = (new SavePriceShik())->pullPriceShik();
 
         return view('home.home', compact(
             'savePrice_serg',
             'savePrice_nereida',
             'savePrice_sota',
-            'savePrice_stt'
+            'savePrice_stt',
+            'savePrice_shik'
         ));
 
     }

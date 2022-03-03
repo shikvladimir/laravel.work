@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\ParsPrices\Price_nereida;
 use App\Helpers\ParsPrices\Price_serg;
+use App\Helpers\ParsPrices\Price_shik;
 use App\Helpers\ParsPrices\Price_sota;
 use App\Helpers\ParsPrices\Price_stt;
 
@@ -54,6 +55,14 @@ class AllPricesListsController extends Controller
             } else {
                 $price_nereida = "";
             }
+
+            if ($working_price == "price_shik") {
+                $price_nereida = (new Price_shik())->pars();
+            } else {
+                $price_nereida = "";
+            }
+
+
         }
 
         return redirect('/');

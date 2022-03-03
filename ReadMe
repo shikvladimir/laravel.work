@@ -1,0 +1,8 @@
+1. processing of the main price list -
+    ProcessingPriceController
+
+2. processing xml, xls, xlsx files using 'PhpSpreadsheet' (https://github.com/shikvladimir/PhpSpreadsheet) -
+    Price_nereida.php,Price_serg.php,Price_stt.php,Price_sota.php,Price_shik.php
+
+3. processing Zip of the catalog using 'ZipArchive' -
+    Price_sota.php
