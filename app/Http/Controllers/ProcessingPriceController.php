@@ -39,6 +39,9 @@ class ProcessingPriceController extends Controller
         foreach ($datas as $key => $value) {
             $data[] = $value;
         }
+
         return view('home.home', compact('data', 'datas'));
     }
+
+
 }

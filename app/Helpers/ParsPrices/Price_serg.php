@@ -12,6 +12,7 @@ class Price_serg
 {
     public function pars()
     {
+        ini_set('max_execution_time', '0');
         $getFileName = $_SERVER['DOCUMENT_ROOT'] . '/../prices_for_processing/price_serg/PRICE.xls';
         $spreadsheet = IOFactory::load($getFileName);
 
@@ -39,95 +40,98 @@ class Price_serg
             }
         }
 
-        $arrWithProduct = [];
-
         foreach ($productPrice as $keyPrice => $productFromPrice) {
+            $price = $productFromPrice[3];
+            $availability = $productPrice[1];
             for ($countPrice = count($productFromPrice), $q = 0; $q < $countPrice; $q++) {
+
+
                 if (is_array($productFromPrice[$q])) {
+                    if (isset($productFromPrice[$q][3])) {
+                        Price::query()->where('product', '=', $productFromPrice[$q][3])
+                            ->update([
+                                'price' => $price,
+                            ]);
+                    }
 
+                    if (isset($productFromPrice[$q][2])) {
+                        Price::query()->where('product', '=', $productFromPrice[$q][2])
+                            ->update([
+                                'price' => $price,
+                            ]);
+                    }
 
-                    $products_db_product = Price::pluck('product')->toArray();
-                    for ($arrCount = count($products_db_product), $i = 0; $i < $arrCount; $i++) {
-                        $product_product_from_db = $products_db_product[$i];
-
-                        if (isset($productFromPrice[$q][3])) {
-                            if ($product_product_from_db == $productFromPrice[$q][3]) {
-                                $arrWithProduct[] = $product_product_from_db;
-
-                            }
-                        }
-                        if (isset($productFromPrice[$q][2])) {
-                            if ($product_product_from_db == $productFromPrice[$q][2]) {
-                                $arrWithProduct[] = $product_product_from_db;
-                            }
-                        }
-                        if (isset($productFromPrice[$q][1])) {
-                            if ($product_product_from_db == $productFromPrice[$q][1] ||
-                                $product_product_from_db == $productFromPrice[$q][1] .' '. '(черный)' ||
-                                $product_product_from_db == $productFromPrice[$q][1] ||
-                                $product_product_from_db == substr_replace($productFromPrice[$q][1], '-', -2, 0) ||
-                                $product_product_from_db == substr_replace($productFromPrice[$q][1], '-', -3, 0) ||
-                                $product_product_from_db == str_replace('MK', 'mk', $productFromPrice[$q][1]) || //почему то выводит T50RPmk3 хотя её нету. С остальным работает
-                                $product_product_from_db == str_ireplace('XPB', 'x Limited Edition (фиолетовый)', $productFromPrice[$q][1]) ||
-                                $product_product_from_db == substr_replace($productFromPrice[$q][1], 'x', -1) ||
-                                $product_product_from_db == substr_replace($productFromPrice[$q][1], ' ', -1) . '(белый)' ||
-                                $product_product_from_db == substr_replace($productFromPrice[$q][1], ' ', -1) . '(черный)'
-                            ) {
-                                $arrWithProduct[] = $product_product_from_db;
-                            }
-                        }
-                        if (isset($productFromPrice[$q][1]) && isset($productFromPrice[$q][2])) {
-                            if ($product_product_from_db == $productFromPrice[$q][1] . $productFromPrice[$q][2] ||
-//                                $product_product_from_db == $productFromPrice[$q][1] . ' ' . $productFromPrice[$q][2]. ' ' .'Wireless'  ||
-                                $product_product_from_db == $productFromPrice[$q][1] . str_replace('GY', ' (серый)', $productFromPrice[$q][2]) ||
-                                $product_product_from_db == $productFromPrice[$q][1] . str_replace('BK', ' (черный)', $productFromPrice[$q][2]) ||
-                                $product_product_from_db == $productFromPrice[$q][1] . str_replace('WH', ' (белый)', $productFromPrice[$q][2]) ||
-                                $product_product_from_db == $productFromPrice[$q][1] . str_replace('RD', ' (красный)', $productFromPrice[$q][2]) ||
-                                $product_product_from_db == $productFromPrice[$q][1] . ' ' . $productFromPrice[$q][2] ||
-                                $product_product_from_db == $productFromPrice[$q][1] . ' ' . substr_replace($productFromPrice[$q][2], ' ', 1, 0) ||
-                                $product_product_from_db == $productFromPrice[$q][1] . ' ' . str_replace('BK', '(черный)', $productFromPrice[$q][2]) ||
-                                $product_product_from_db == $productFromPrice[$q][1] . ' ' . str_replace('BL', '(синий)', $productFromPrice[$q][2]) ||
-                                $product_product_from_db == $productFromPrice[$q][1] . ' ' . str_replace('WH', '(белый)', $productFromPrice[$q][2]) ||
-                                $product_product_from_db == $productFromPrice[$q][1] . ' ' . str_replace('Black', '(черный)', $productFromPrice[$q][2]) ||
-                                $product_product_from_db == $productFromPrice[$q][1] . ' ' . str_replace('White', '(белый)', $productFromPrice[$q][2]) ||
-                                $product_product_from_db == str_replace('X', 'x', $productFromPrice[$q][1]) . ' ' .
-                                str_replace('Black', '(черный)', $productFromPrice[$q][2]) ||
-                                $product_product_from_db == str_replace('X', 'x', $productFromPrice[$q][1]) . ' ' .
-                                str_replace('White', '(белый)', $productFromPrice[$q][2])
-                            ) {
-                                $arrWithProduct[] = $product_product_from_db;
-                            }
-                        }
-
-                        if (isset($productFromPrice[$q][2]) && isset($productFromPrice[$q][3])) {
-                            if ($product_product_from_db == $productFromPrice[$q][2] . $productFromPrice[$q][3]) {
-                                $arrWithProduct[] = $product_product_from_db;
-                            }
-
-                        }
-
-                        if (isset($productFromPrice[$q][1]) && isset($productFromPrice[$q][2]) && isset($productFromPrice[$q][3])) {
-                            if ($product_product_from_db == $productFromPrice[$q][1] . ' ' . $productFromPrice[$q][2] . ' ' . $productFromPrice[$q][3] ||
-//                                $product_product_from_db == $productFromPrice[$q][1] . ' ' . $productFromPrice[$q][2]  ||
-                                $product_product_from_db == $productFromPrice[$q][1] . ' ' . $productFromPrice[$q][2] . ' ' .
-                                str_replace('black', '(черный)', $productFromPrice[$q][3]) ||
-                                $product_product_from_db == $productFromPrice[$q][1] . ' ' . $productFromPrice[$q][2] . ' ' .
-                                str_replace('BLACK', '(черный)', $productFromPrice[$q][3])
-
-                            ) {
-                                $arrWithProduct[] = $product_product_from_db;
-                            }
-
-                        }
+                    if (isset($productFromPrice[$q][1])) {
+                        Price::query()->where('product', '=', $productFromPrice[$q][1])
+                            ->orWhere('product', '=', $productFromPrice[$q][1] . ' ' . '(черный)')
+                            ->orWhere('product', '=', substr_replace($productFromPrice[$q][1], '-', -2, 0))
+                            ->orWhere('product', '=', substr_replace($productFromPrice[$q][1], '-', -3, 0))
+                            ->orWhere('product', '=', substr_replace($productFromPrice[$q][1], ' ', -1) . '(белый)')
+                            ->orWhere('product', '=', substr_replace($productFromPrice[$q][1], ' ', -1) . '(черный)')
+                            ->orWhere('product', '=', str_replace('MK', 'mk', $productFromPrice[$q][1]))
+                            ->orWhere('product', '=', str_ireplace('XPB', 'x Limited Edition (фиолетовый)', $productFromPrice[$q][1]))
+                            ->orWhere('product', '=', substr_replace($productFromPrice[$q][1], 'x', -1))
+                            ->update([
+                                'price' => $price,
+                            ]);
 
                     }
+
+                    if (isset($productFromPrice[$q][1]) && isset($productFromPrice[$q][2])) {
+                        Price::query()->where('product', '=', $productFromPrice[$q][1] . $productFromPrice[$q][2])
+                            ->orWhere('product', '=', $productFromPrice[$q][1] . str_replace('GY', ' (серый)', $productFromPrice[$q][2]))
+                            ->orWhere('product', '=', $productFromPrice[$q][1] . str_replace('BK', ' (черный)', $productFromPrice[$q][2]))
+                            ->orWhere('product', '=', $productFromPrice[$q][1] . str_replace('WH', ' (белый)', $productFromPrice[$q][2]))
+                            ->orWhere('product', '=', $productFromPrice[$q][1] . str_replace('RD', ' (красный)', $productFromPrice[$q][2]))
+                            ->orWhere('product', '=', $productFromPrice[$q][1] . ' ' . $productFromPrice[$q][2])
+                            ->orWhere('product', '=', $productFromPrice[$q][1] . ' ' . substr_replace($productFromPrice[$q][2], ' ', 1, 0))
+                            ->orWhere('product', '=', $productFromPrice[$q][1] . ' ' . str_replace('BK', '(черный)', $productFromPrice[$q][2]))
+                            ->orWhere('product', '=', $productFromPrice[$q][1] . ' ' . str_replace('BL', '(синий)', $productFromPrice[$q][2]))
+                            ->orWhere('product', '=', $productFromPrice[$q][1] . ' ' . str_replace('WH', '(белый)', $productFromPrice[$q][2]))
+                            ->orWhere('product', '=', $productFromPrice[$q][1] . ' ' . str_replace('Black', '(черный)', $productFromPrice[$q][2]))
+                            ->orWhere('product', '=', $productFromPrice[$q][1] . ' ' . str_replace('White', '(белый)', $productFromPrice[$q][2]))
+                            ->orWhere('product', '=', str_replace('X', 'x', $productFromPrice[$q][1]) . ' ' .
+                                str_replace('Black', '(черный)', $productFromPrice[$q][2]))
+                            ->orWhere('product', '=', str_replace('X', 'x', $productFromPrice[$q][1]) . ' ' .
+                                str_replace('White', '(белый)', $productFromPrice[$q][2]))
+                            ->update([
+                                'price' => $price,
+                            ]);
+                    }
+
+                    if (isset($productFromPrice[$q][2]) && isset($productFromPrice[$q][3])) {
+                        Price::query()->where('product', '=', $productFromPrice[$q][2] . $productFromPrice[$q][3])
+                            ->orWhere('product', '=',$productFromPrice[$q][1] . ' ' . $productFromPrice[$q][2] . ' ' . $productFromPrice[$q][3])
+                            ->orWhere('product', '=',$productFromPrice[$q][1] . ' ' . $productFromPrice[$q][2] . ' ' .
+                                str_replace('black', '(черный)', $productFromPrice[$q][3]))
+                            ->orWhere('product', '=',$productFromPrice[$q][1] . ' ' . $productFromPrice[$q][2] . ' ' .
+                                str_replace('BLACK', '(черный)', $productFromPrice[$q][3]))
+                            ->update([
+                                'price' => $price,
+                            ]);
+                    }
+
+//                    if(isset($productFromPrice[$q][1]) && isset($productFromPrice[$q][2]) && isset($productFromPrice[$q][3])){
+//                        Price::query()->where('product', '=',$productFromPrice[$q][1] . ' ' . $productFromPrice[$q][2] . ' ' . $productFromPrice[$q][3])
+//                            ->orWhere('product', '=',$productFromPrice[$q][1] . ' ' . $productFromPrice[$q][2] . ' ' .
+//                                str_replace('black', '(черный)', $productFromPrice[$q][3]))
+//                            ->orWhere('product', '=',$productFromPrice[$q][1] . ' ' . $productFromPrice[$q][2] . ' ' .
+//                                str_replace('BLACK', '(черный)', $productFromPrice[$q][3]))
+//                            ->update([
+//                                'price' => 5,
+//                            ]);
+//                    }
+
+//                foreach ( $arrWithProduct as $article) {
+////                    dd($article);
+//                    if ($availability != 0.0 &&  $price >10) {
+//                        Price::query()->where('product', '=', $article)
+//                            ->update(['price' => 99]);
+//                    }
+//                }
                 }
             }
         }
-
-        dd($arrWithProduct);
-//dd($d);
-
     }
 }
 

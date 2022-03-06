@@ -2,56 +2,33 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Helpers\SavePrices\SavePriceSerg;
 use App\Helpers\SavePrices\SavePriceNereida;
 use App\Helpers\SavePrices\SavePriceShik;
 use App\Helpers\SavePrices\SavePriceSota;
 use App\Helpers\SavePrices\SavePriceStt;
+use App\Helpers\USD;
 
 class HomeController extends Controller
 {
     public function index()
     {
+        (new USD())->getCourse();
+
         return view('home.home');
     }
 
-
     public function pullPriceList()
     {
-        $savePrice_serg = (new SavePriceSerg())->pullPriceSerge();
+        (new SavePriceSerg())->pullPriceSerge();
+        (new SavePriceNereida())->pullPriceNereida();
+        (new SavePriceSota())->pullPriceSota();
+        (new SavePriceStt())->pullPriceStt();
+        (new SavePriceShik())->pullPriceShik();
 
-        $savePrice_nereida = (new SavePriceNereida())->pullPriceNereida();
-
-        $savePrice_sota = (new SavePriceSota())->pullPriceSota();
-
-        $savePrice_stt = (new SavePriceStt())->pullPriceStt();
-
-        $savePrice_shik = (new SavePriceShik())->pullPriceShik();
-
-        return view('home.home', compact(
-            'savePrice_serg',
-            'savePrice_nereida',
-            'savePrice_sota',
-            'savePrice_stt',
-            'savePrice_shik'
-        ));
-
+        return redirect('/');
     }
 
 }
 
 
-//    public function getCourse()
-//    {
-////        $getCourse = file_get_contents('https://www.nbrb.by/api/exrates/currencies');
-////        $course = json_decode($getCourse);
-//////        dd($course);
-////        $courseId = array_filter($course,'Cur_ID' == 145);
-////        dd($courseId);
-////        foreach ($course as $key => $value) {
-//////            $a[] = $value;
-////            dump($value);
-////        }
-//
-//    }
