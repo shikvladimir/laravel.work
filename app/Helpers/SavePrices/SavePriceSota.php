@@ -5,9 +5,9 @@ namespace App\Helpers\SavePrices;
 
 class SavePriceSota
 {
+
     public function pullPriceSota()
     {
-
         $mail_login = "vnstore2018@gmail.com";
         $mail_password = "nxanmishwgniwmmt";
         $mail_imap = "{imap.gmail.com:993/imap/ssl}INBOX";

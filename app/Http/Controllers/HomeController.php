@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\CurrenciesInterface;
 use App\Helpers\SavePrices\SavePriceSerg;
 use App\Helpers\SavePrices\SavePriceNereida;
 use App\Helpers\SavePrices\SavePriceShik;
 use App\Helpers\SavePrices\SavePriceSota;
 use App\Helpers\SavePrices\SavePriceStt;
-use App\Helpers\USD;
 
 class HomeController extends Controller
 {
-    public function index()
-    {
-        (new USD())->getCourse();
 
-        return view('home.home');
+    public function index(CurrenciesInterface $currency)
+    {
+        $currency->getCourse();
+
+        return view('home.home',compact('currency'));
     }
 
     public function pullPriceList()

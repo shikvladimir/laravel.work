@@ -7,8 +7,9 @@ namespace App\Helpers\SavePrices;
 class SavePriceShik
 {
 
-    public function pullPriceShik(){
 
+    public function pullPriceShik()
+    {
         $url = 'https://docs.google.com/spreadsheets/d/1OF8QiBhAOHfSclKAexdDm8JesvgpgYCRANwgF6yvovw/export?gid=0';
         $path = $_SERVER['DOCUMENT_ROOT'] . "/../prices_for_processing/price_shik/Склад - Лист1.xlsx";
         $file_name = basename($url);

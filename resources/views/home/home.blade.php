@@ -18,7 +18,6 @@
 
         <div id="primary_nav_wrap">
             <ul>
-{{--                <form action="{{route('allPricesLists',[$files->id])}}" method="post">--}}
                 <form action="{{route('allPricesLists')}}" method="post">
 
                 @csrf

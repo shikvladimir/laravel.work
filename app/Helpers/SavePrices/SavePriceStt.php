@@ -5,6 +5,7 @@ namespace App\Helpers\SavePrices;
 
 class SavePriceStt
 {
+
     public function pullPriceStt()
     {
         $url = 'http://stt.by/upload/data/stt/Sklad.xls';

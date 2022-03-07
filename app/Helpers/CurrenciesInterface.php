@@ -4,7 +4,7 @@
 namespace App\Helpers;
 
 
-interface Currencies
+interface CurrenciesInterface
 {
     public function getCourse();
 }
