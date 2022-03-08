@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Any_users;
-use App\Models\Chats;
 use App\Models\Messages;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,7 +12,6 @@ class LoginController extends Controller
 {
     public function login(Request $request)
     {
-
         session_start();
 
         $any_user_id = Any_users::query()->get();

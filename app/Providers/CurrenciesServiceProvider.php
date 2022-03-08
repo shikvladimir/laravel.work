@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Helpers\CurrenciesInterface;
 use App\Helpers\Currency\USD;
-use App\Http\Controllers\HomeController;
 use Illuminate\Support\ServiceProvider;
 
 class CurrenciesServiceProvider extends ServiceProvider

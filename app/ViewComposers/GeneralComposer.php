@@ -8,7 +8,7 @@ use Illuminate\View\View;
 class GeneralComposer
 {
         public function compose(View $view){
-            $datas = Price::paginate(100);
+            $datas = Price::query()->paginate(100);
             $data = [];
             foreach ($datas as $key => $value) {
                 $data[] = $value;
@@ -23,7 +23,6 @@ class GeneralComposer
                 ->with('datas', $datas)
                 ->with('data',$data)
                 ->with('files',$files);
-
         }
 
 

@@ -43,8 +43,9 @@ class PriceLoadingJob implements ShouldQueue
         }
 
         $this->file = Storage::get('/public/price_positions.csv');
-//        $str = str_replace("\r\n", "|", $this->file);
-        $str = str_replace("\n", "|", $this->file);
+//        $str = str_replace("\r\n", "|", $this->file);   //сменилась разметка файла на "\n"
+        $str = str_replace("\n", "|", $this->file);      //сменилась разметка файла на "\r"
+//        $str = str_replace("\r", "|", $this->file);
         $newRows = explode('|', $str);
         array_shift($newRows);
         $array = array_diff($newRows, ["", " "]);
@@ -52,7 +53,6 @@ class PriceLoadingJob implements ShouldQueue
 
         foreach ($array as $key => $row) {
             $params[$key] = array_map('trim', explode(';', $row));
-
         }
 
         foreach ($params as $param) {
@@ -60,9 +60,9 @@ class PriceLoadingJob implements ShouldQueue
             $manufacturer = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[1]);
             $product = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[2]);
             $article = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[3]);
-//            $number_offers = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[4]);
             $number_offers = $param[4];
-            $price = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[5]);
+//            $price = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[5]);
+            $price = '0,00';
             $currency = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[6]);
             $description = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[7]);
             $maker = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[8]);
@@ -74,13 +74,14 @@ class PriceLoadingJob implements ShouldQueue
             $service_life = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[14]);
             $for_business = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[15]);
             $credit = mb_convert_encoding($param[16], 'UTF-8', 'windows-1251');
-            $stock = $param[17] === '' ? '' : 'run_out_of_stock';
+//            $stock = $param[17] === '' ? '' : 'run_out_of_stock';
+            $stock = $param[17] === '';
             $installment_payment = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[18]);
             $price_halva = $param[19];
             $onliner_prime = mb_convert_encoding($param[20], 'UTF-8', 'windows-1251');
 
 
-            Price::create([
+            Price::query()->create([
                 'chapter' => $chapter,
                 'manufacturer' => $manufacturer,
                 'product' => $product,
@@ -103,8 +104,6 @@ class PriceLoadingJob implements ShouldQueue
                 'price_halva' => $price_halva,
                 'onliner_prime' => $onliner_prime,
             ]);
-
         }
-
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Helpers\CurrenciesInterface;
 use App\Helpers\ParsPrices\Price_nereida;
 use App\Helpers\ParsPrices\Price_serg;
 use App\Helpers\ParsPrices\Price_shik;
@@ -12,7 +13,7 @@ use App\Helpers\ParsPrices\Price_stt;
 
 class AllPricesListsController extends Controller
 {
-    public function allPricesLists()
+    public function allPricesLists(CurrenciesInterface $currency)
     {
         $list = $_SERVER['DOCUMENT_ROOT'] . '/../prices_for_processing';
         $files = scandir($list);
@@ -25,11 +26,6 @@ class AllPricesListsController extends Controller
                 $working_prices[] = $files[$value];
             }
         }
-
-        $price_sota = null;
-        $price_stt = null;
-        $price_serg = null;
-        $price_nereida = null;
 
         foreach ($working_prices as $key => $working_price) {
             if ($working_price == "price_sota") {
@@ -45,7 +41,7 @@ class AllPricesListsController extends Controller
             }
 
             if ($working_price == "price_serg") {
-                $price_serg = (new Price_serg())->pars();
+                $price_serg = (new Price_serg())->pars($currency);
             } else {
                 $price_serg = "";
             }

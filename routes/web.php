@@ -1,6 +1,5 @@
 <?php
 
-
 use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\ChatsController;
 use App\Http\Controllers\Admin\Settings\SettingsController;
@@ -27,9 +26,6 @@ Route::post('allPricesLists', [AllPricesListsController::class, 'allPricesLists'
 
 Route::post('processingPrice', [ProcessingPriceController::class, 'processingPrice'])
     ->name('processingPrice');
-
-Route::get('processingPrice', [ProcessingPriceController::class, 'getPrice'])
-    ->name('getPrice');
 
 Route::get('login', [LoginController::class, 'login'])
     ->name('login');

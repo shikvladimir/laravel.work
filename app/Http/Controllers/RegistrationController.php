@@ -31,7 +31,7 @@ class RegistrationController extends Controller
             $data['photo'] = $photo;
         }
 
-        User::create($data);
+        User::query()->create($data);
 
         $data = new stdClass();
         $data->name = $request->name;
@@ -42,7 +42,6 @@ class RegistrationController extends Controller
 
         return redirect()->route('login')
             ->with('success', 'Ваше сообщение успешно отправлено!');
-//        return view('auth.login');
     }
 
 }
