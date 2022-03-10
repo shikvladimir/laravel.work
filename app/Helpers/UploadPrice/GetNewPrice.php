@@ -10,12 +10,10 @@ use PhpOffice\PhpSpreadsheet\Writer\Xls;
 class GetNewPrice
 {
     public function get_new_price(){
+        header('Content-type: text/html; charset=utf-8');
         header('Content-Type: application/csv');
         header('Content-Disposition: attachment; filename="export.csv";');
 
-//        $sql = Price::query()->select('chapter',
-//        'manufacturer',
-//        '')->toArray();
         $sql = Price::all()->toArray();
         $fp = fopen('php://output', 'w');
 
@@ -43,8 +41,15 @@ class GetNewPrice
             'Onliner Prime',
         ];
 
-        fputcsv($fp, $names_column, ";");
+
+        $column = [];
+        foreach ($names_column as $col){
+            $column[] = html_entity_decode($col, ENT_NOQUOTES,'UTF-8');
+        }
+        fputcsv($fp, $column, ";");
+
         foreach ($sql as $key => $value){
+            array_shift($value);
             fputcsv($fp, $value, ";");
         }
 

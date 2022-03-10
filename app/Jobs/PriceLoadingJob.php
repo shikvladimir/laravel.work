@@ -57,11 +57,19 @@ class PriceLoadingJob implements ShouldQueue
 
         foreach ($params as $param) {
             $chapter = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[0]);
+            $chapter = str_replace('"', '', $chapter);
+
             $manufacturer = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[1]);
+            $manufacturer = str_replace('"', '', $manufacturer);
+
             $product = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[2]);
+            $product = str_replace('"', '', $product);
+
             $article = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[3]);
+            $article = str_replace('"', '', $article);
+
             $number_offers = $param[4];
-//            $price = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[5]);
+
             $price = '0,00';
             $currency = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[6]);
             $description = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[7]);

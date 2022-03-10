@@ -29,13 +29,13 @@ class CreatePricesTable extends Migration
             $table->longText('guarantee')->nullable();
             $table->longText('delivery_Minsk')->nullable();
             $table->longText('delivery_RB')->nullable();
-            $table->string('stock',20)->nullable();
             $table->string('service_life',10)->nullable();
             $table->string('for_business', 10)->default('нет')->nullable();
             $table->string('credit',20)->default('нет')->nullable();
+            $table->string('stock',20)->nullable();
             $table->string('installment_payment',10)->nullable();;
             $table->string('price_halva',10)->default(0)->nullable();
-            $table->string('onliner_prime',10)->default(0)->nullable();
+            $table->string('onliner_prime',10)->default('нет')->nullable();
         });
     }
 
