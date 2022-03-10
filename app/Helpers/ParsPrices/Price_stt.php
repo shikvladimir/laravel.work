@@ -40,12 +40,10 @@ class Price_stt
                                 Price::query()->where('article', '=', $article[0])
                                     ->update(['price' => round($article[1] * 0.3 + $article[1], 2)]);
                             }
-
                         }
                     }
                 }
             }
         }
-//        dd($arrProduct);
     }
 }

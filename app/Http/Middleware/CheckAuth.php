@@ -19,7 +19,8 @@ class CheckAuth
     {
         if(!Auth::user()){
 
-            abort(403);
+//            abort(403);
+            abort(redirect('login'));
         }
 
 

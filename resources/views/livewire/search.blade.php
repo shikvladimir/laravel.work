@@ -1,22 +1,6 @@
 <div>
 
-    {{--    <form class="input-group" name="search" method="post" action="#">--}}
-    {{--        <input class="form-control" placeholder="Search ..." type="text" wire:model="searchProduct" />--}}
-    {{--    </form>--}}
-
-    {{--        <ul>--}}
-    {{--            @foreach($prices as $price)--}}
-    {{--                <li>--}}
-    {{--                    <a class="nav-link" href="#">--}}
-    {{--                        {{ $price->manufacturer }}--}}
-    {{--                        {{ $price->product }}--}}
-    {{--                    </a>--}}
-    {{--                </li>--}}
-    {{--            @endforeach--}}
-    {{--        </ul>--}}
-
-
-    <a href="#win2">
+<a href="#win2">
         <div class="input-group">
             <input class="form-control" placeholder="Search ..." type="text" wire:model="searchProduct"/>
             <button type="button" class="btn btn-outline-success">
@@ -39,7 +23,7 @@
         @foreach($prices as $price)
             <ul>
                 <li>
-                    <a class="nav-link" href="#{{$price->product}}">
+                    <a class="nav-link" href="?page=1#{{$price->product}}">
                         <div class="d-flex justify-content-between">
                             <div class="d-flex ">
                                 <div>{{ $price->manufacturer }}&nbsp;</div>

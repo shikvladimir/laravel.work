@@ -19,7 +19,7 @@ class CreatePricesTable extends Migration
             $table->string('manufacturer', 100)->nullable();
             $table->string('product', 100)->nullable();
             $table->string('article', 50)->nullable();
-            $table->bigInteger('number_offers')->nullable(false);//
+            $table->bigInteger('number_offers')->nullable();//
             $table->longText('price')->nullable();//
             $table->string('currency', 10)->nullable();
             $table->string('description',255)->nullable();

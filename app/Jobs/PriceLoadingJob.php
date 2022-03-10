@@ -74,8 +74,7 @@ class PriceLoadingJob implements ShouldQueue
             $service_life = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[14]);
             $for_business = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[15]);
             $credit = mb_convert_encoding($param[16], 'UTF-8', 'windows-1251');
-//            $stock = $param[17] === '' ? '' : 'run_out_of_stock';
-            $stock = $param[17] === '';
+            $stock = null;
             $installment_payment = iconv('windows-1251//IGNORE', 'UTF-8//IGNORE', $param[18]);
             $price_halva = $param[19];
             $onliner_prime = mb_convert_encoding($param[20], 'UTF-8', 'windows-1251');

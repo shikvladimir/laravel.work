@@ -22,20 +22,20 @@ class Price_shik
             $availability = $data[$d][3];
 
 
-                if ($availability == 'в наличии') {
-                    Price::query()->where('article', '=', $article_price)
-                        ->orWhere('product', '=', $article_price)
-                        ->update([
-                            'price' => round($price * 0.2 + $price, 2),
-                            'stock' => 'run_out_of_stock'
-                        ]);
-                } else {
-                    Price::query()->where('article', '=', $article_price)
-                        ->update([
-                            'price' => '0',
-                            'stock' => null
-                        ]);
-                }
+            if ($availability == 'в наличии') {
+                Price::query()->where('article', '=', $article_price)
+                    ->orWhere('product', '=', $article_price)
+                    ->update([
+                        'price' => round($price * 0.2 + $price, 2),
+                        'stock' => 'run_out_of_stock'
+                    ]);
+            } else {
+                Price::query()->where('article', '=', $article_price)
+                    ->update([
+                        'price' => '0',
+                        'stock' => null
+                    ]);
+            }
         }
     }
 }
