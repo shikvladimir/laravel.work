@@ -14,7 +14,7 @@
     </a>
 
 
-    <a href="#x" class="overlay" id="win2"></a>
+    <a href="#" class="overlay" id="win2"></a>
     <div class="popup">
         <form class="input-group" name="search" method="post" action="#">
             <input class="form-control" placeholder="Search ..." type="text" wire:model="searchProduct"/>

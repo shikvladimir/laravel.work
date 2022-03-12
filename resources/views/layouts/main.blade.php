@@ -11,12 +11,13 @@
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/templatemo.css">
-    <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style_price.css')}}">
 
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
-    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="public/assets/css/fontawesome.min.css">
     <!--
 
 
@@ -69,25 +70,62 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between"
+        <div class=" collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between"
              id="templatemo_main_nav">
             <div class="flex-fill">
-                <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Shop</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-                </ul>
+                <div class="menu">
+
+                    <div onclick="show('none')" id="Fpp-background"></div>
+                    <!--01-->
+                    <div id="Fpp-window-manual" class="Fpp-window">
+                        <H2>Как этим пользоваться?</H2>
+                        <p>1.Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <p>2.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                            when an unknown printer took a galley of type and scrambled it to make a type
+                            specimen book.</p>
+                        <p>3.It has survived not only five centuries, but also the leap into electronic typesetting,
+                            remaining essentially unchanged.</p>
+                        <p>4.It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
+                            passages, and more recently with desktop publishing software like Aldus PageMaker
+                            including versions of Lorem Ipsum.</p>
+
+{{--                        <button class="close" onclick="show('none', 'Fpp-window-manual')">Х</button>--}}
+                    </div>
+                    <a class="link" href="#open" onclick="show('block', 'Fpp-window-manual')"><!--Открыть-->
+                        <p>Как пользоваться?</p>
+                    </a>
+
+                    <!--02-->
+                    <div id="Fpp-window-about" class="Fpp-window">
+                        <h2>Кто мы?</h2>
+                        <img src="https://lastkey.ru/800/600/https/gonhub.com/wp-content/uploads/2019/04/tong-hop-nhung-mau-tranh-to-mau-con-meo-dep-sieu-cool-cho-be-55.jpg" width="400" height="400" alt="">
+                        <h2>РАЗРАБОТЧИКИ</h2>
+                        {{--                        <button onclick="show('none', 'Fpp-window-about')">Х</button>--}}
+                    </div>
+                    <a class="link" href="#open" onclick="show('block', 'Fpp-window-about')"><!--Открыть-->
+                        <p>О нас</p>
+                    </a>
+
+                    <!--03-->
+                    <div id="Fpp-window-contact" class="Fpp-window">
+                        <h2>Наши контакты</h2>
+                        <h4>Телефоны:</h4>
+                        <p>+375 44 711 57 61</p>
+                        <p>+375 29 676 95 73</p>
+                        <h4>Email:</h4>
+                        <p>vnstore2018@gmail.com</p>
+                        <p>shylvladimir@gmail.com</p>
+                        <h4>Адрес:</h4>
+                        <p>город Минск, ул. Тимерязева 67</p>
+{{--                        <button onclick="show('none', 'Fpp-window-contact')">Х</button>--}}
+                    </div>
+                    <a class="link" href="#open" onclick="show('block', 'Fpp-window-contact')"><!--Открыть-->
+                        <p>Контакты</p>
+                    </a>
+
+                </div>
             </div>
-                @livewire('search')
+            @livewire('search')
         </div>
 
     </div>
@@ -194,11 +232,13 @@
 
 <!-- Start Script -->
 
-<script src="{{asset('js/jquery-1.11.0.min.js')}}"></script>
-<script src="{{asset('js/jquery-migrate-1.2.1.min.js')}}"></script>
-<script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
-<script src="{{asset('js/templatemo.js')}}"></script>
-<script src="{{asset('js/custom.js')}}"></script>
+<script src="{{asset('assets/js/jquery-1.11.0.min.js')}}"></script>
+<script src="{{asset('assets/js/jquery-migrate-1.2.1.min.js')}}"></script>
+<script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('assets/js/templatemo.js')}}"></script>
+<script src="{{asset('assets/js/custom.js')}}"></script>
+<script src="//api-maps.yandex.ru/2.0/?load=package.full&lang=ru-RU"></script>
+
 <!-- End Script -->
 @livewireScripts
 </body>
