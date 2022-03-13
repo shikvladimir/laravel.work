@@ -88,5 +88,6 @@ class ChatsUserController extends Controller
         ]);
 
         return back()->with('auth.login');
+
     }
 }

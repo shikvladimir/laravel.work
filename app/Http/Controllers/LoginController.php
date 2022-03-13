@@ -51,19 +51,20 @@ class LoginController extends Controller
             ->orderBy('messages.id')
             ->get();
 
+
         return view('auth.login', compact('content', 'any_user_id'));
 
     }
 
     public function checkLogin(Request $request)
     {
-        $data = [];
+        $content = [];
+        $any_user_id = [];
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'confirmed' => 1])) {
             return redirect('/');
         } else {
-            return view('auth.login', compact('data'));
+            return view('auth.login', compact('content','any_user_id'));
         }
-
     }
 
     public function store(Request $request)
