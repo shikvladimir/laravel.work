@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/templatemo.css">
     <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/chat.css')}}">
 
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet"
@@ -123,6 +124,7 @@
                type="{{$item->text}}"
                @endforeach
                name="any_user_name"
+               id="any_user_name"
                placeholder="Ваше Имя">
 
         <input class="border_for_input"
@@ -130,128 +132,17 @@
                type="{{$item->text}}"
                @endforeach
                name="chat_name"
+               id="chat_name"
                placeholder="Тема Сообщения">
         <textarea type="text"
                   name="content"
+                  id="content"
                   placeholder="Введите Сообщение..." required></textarea>
         <button type="submit" class="btn">Отправить</button>
         <button type="button" class="btn cancel" onclick="closeForm()">Закрыть</button>
     </form>
 </div>
 
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    * {
-        box-sizing: border-box;
-    }
-
-    .border_for_input {
-        border: none;
-        background: #f1f1f1;
-        width: 100%;
-        margin: 5px;
-    }
-
-    /* Кнопка, используемая для открытия формы чата - закреплена в нижней части страницы */
-    .open-button {
-        background-color: #4CAF50;
-        color: white;
-        padding: 16px 20px;
-        border: none;
-        border-radius: 50px;
-        cursor: pointer;
-        opacity: 0.5;
-        position: fixed;
-        bottom: 23px;
-        right: 28px;
-        width: 280px;
-    }
-
-    .text-chat {
-        margin: 0;
-    }
-
-    .chat-field {
-        height: 180px;
-        overflow: scroll;
-    }
-
-    /* Всплывающий чат - скрыт по умолчанию */
-    .chat-popup {
-
-        display: none;
-        position: fixed;
-        bottom: 0;
-        right: 15px;
-        border: 3px solid #f1f1f1;
-        z-index: 9;
-    }
-
-    /* Добавление стилей в контейнер формы */
-    .form-container {
-        max-width: 300px;
-        padding: 10px;
-        background-color: white;
-    }
-
-    /* Полноразмерная текстовая область */
-    .form-container textarea {
-        width: 100%;
-        padding: 15px;
-        margin: 5px 0 22px 0;
-        border: none;
-        background: #f1f1f1;
-        resize: none;
-        min-height: 100px;
-    }
-
-    /* Когда текстовая область получит фокус, сделайте что-нибудь */
-    .form-container textarea:focus {
-        background-color: #ddd;
-        outline: none;
-    }
-
-    /* Установите стиль для кнопки отправить/кнопка */
-    .form-container .btn {
-        background-color: #4CAF50;
-        color: white;
-        padding: 16px 20px;
-        border: none;
-        cursor: pointer;
-        width: 100%;
-        margin-bottom: 10px;
-        opacity: 0.8;
-    }
-
-    /* Добавьте красный цвет фона к кнопке отмена */
-    .form-container .cancel {
-        background-color: red;
-    }
-
-    /* Добавьте некоторые эффекты наведения на кнопки */
-    .form-container .btn:hover, .open-button:hover {
-        opacity: 1;
-    }
-
-    .block{
-        display: flex;
-        justify-content: start;
-        align-items: center;
-    }
-</style>
-
-<script>
-    function openForm() {
-        document.getElementById("myForm").style.display = "block";
-    }
-
-    function closeForm() {
-        document.getElementById("myForm").style.display = "none";
-    }
-</script>
 <!-- Close Chat -->
 
 <!-- Start Footer -->
@@ -285,11 +176,12 @@
 
 
 <!-- Start Script -->
-<script src="{{asset('js/jquery-1.11.0.min.js')}}"></script>
-<script src="{{asset('js/jquery-migrate-1.2.1.min.js')}}"></script>
-<script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
-<script src="{{asset('js/templatemo.js')}}"></script>
-<script src="{{asset('js/custom.js')}}"></script>
+<script src="{{asset('/assets/js/jquery-1.11.0.min.js')}}"></script>
+<script src="{{asset('/assets/js/jquery-migrate-1.2.1.min.js')}}"></script>
+<script src="{{asset('/assets/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('/assets/js/templatemo.js')}}"></script>
+<script src="{{asset('/assets/js/custom.js')}}"></script>
+<script src="{{asset('/assets/js/chat.js')}}"></script>
 <!-- End Script -->
 </body>
 
