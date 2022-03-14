@@ -4,10 +4,10 @@
 namespace App\Helpers\UploadPrice;
 
 
+use App\Helpers\GetNewPriceInterface;
 use App\Models\Price;
-use PhpOffice\PhpSpreadsheet\Writer\Xls;
 
-class GetNewPrice
+class CsvFormat implements GetNewPriceInterface
 {
     public function get_new_price(){
         header('Content-type: text/html; charset=utf-8');

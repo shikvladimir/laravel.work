@@ -1,0 +1,39 @@
+<yml_catalog date="2018-02-26 03:28">
+<shop>
+<name></name>
+<company></company>
+<url></url>
+
+<currencies>
+<currency id="RUR" rate="1"/>
+<currency id="USD" rate="2"/>
+<currency id="EUR" rate="3"/>
+</currencies>
+
+<categories>
+<category id="20">Сопутствующее</category>
+<category id="17">Аксессуары</category>
+<category id="24">Готовое решение</category>
+<category id="5">Ванны</category>
+<category id="6">Унитазы / биде</category>
+<category id="16">Душ</category>
+<category id="23">Инсталляции</category>
+<category id="8">Смесители</category>
+<category id="7">Полотенцесушители</category>
+<category id="1">Напольная</category>
+<category id="2">Настенная</category>
+<category id="21">Мозаика</category>
+<category id="26">Трапы, душевые лотки</category>
+<category id="4">Раковины</category>
+<category id="19">Декор</category>
+<category id="28">Тумба с раковиной</category>
+<category id="29">Шкаф-зеркало</category>
+<category id="30">Зеркало</category>
+<category id="31">Шкаф</category>
+<category id="32">Шкаф-пенал</category>
+<category id="33">Тумба</category>
+<category id="34">Столик</category>
+<category id="35">Полка</category>
+<category id="36">Консоль</category>
+<category id="37">Банкетка</category>
+</categories>

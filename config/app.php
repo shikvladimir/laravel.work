@@ -178,6 +178,7 @@ return [
         App\Providers\TelescopeServiceProvider::class,
         App\Providers\ViewServiceProvider::class,
         App\Providers\CurrenciesServiceProvider::class,
+        App\Providers\GetNewPriceServiceProvider::class,
     ],
 
     /*
