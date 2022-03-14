@@ -58,13 +58,10 @@ class LoginController extends Controller
 
     public function checkLogin(Request $request)
     {
-        $content = [];
-        $any_user_id = [];
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'confirmed' => 1])) {
             return redirect('/');
         } else {
-//            return view('auth.login', compact('content','any_user_id'));
-            return back()->with('warning', 'Неверные логин или пароль!');
+            return back()->with('warning', 'Неверный логин или пароль!');
         }
     }
 
