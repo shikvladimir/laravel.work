@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Any_users;
 use App\Models\Messages;
 use App\Models\User;
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function login(Request $request)
+    public function login()
     {
         session_start();
 
@@ -51,7 +52,6 @@ class LoginController extends Controller
             ->orderBy('messages.id')
             ->get();
 
-
         return view('auth.login', compact('content', 'any_user_id'));
 
     }
@@ -63,7 +63,8 @@ class LoginController extends Controller
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'confirmed' => 1])) {
             return redirect('/');
         } else {
-            return view('auth.login', compact('content','any_user_id'));
+//            return view('auth.login', compact('content','any_user_id'));
+            return back()->with('warning', 'Неверные логин или пароль!');
         }
     }
 

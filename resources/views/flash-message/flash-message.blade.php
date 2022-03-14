@@ -14,10 +14,25 @@
 @endif
 
 @if ($message = \Illuminate\Support\Facades\Session::get('warning'))
-    <div class="alert alert-warning alert-block">
-        <button type="button" class="close" data-dismiss="alert">×</button>
+<div class="container d-flex justify-content-center">
+    <div class="window">
         <strong>{{ $message }}</strong>
     </div>
+</div>
+
+<style>
+    .window{
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 30px;
+        width: 300px;
+        height: 70px;
+        border-radius: 5px;
+        background-color: rgb(243, 124, 148);
+    }
+</style>
 @endif
 
 @if ($message = \Illuminate\Support\Facades\Session::get('info'))
