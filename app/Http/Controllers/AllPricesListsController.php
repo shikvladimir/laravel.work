@@ -29,36 +29,24 @@ class AllPricesListsController extends Controller
 
         foreach ($working_prices as $key => $working_price) {
             if ($working_price == "price_sota") {
-                $price_sota = (new Price_sota())->pars();
-            } else {
-                $price_sota = "";
+                (new Price_sota())->pars();
             }
 
             if ($working_price == "price_stt") {
-                $price_stt = (new Price_stt())->pars();
-            } else {
-                $price_stt = "";
+                (new Price_stt())->pars();
             }
 
             if ($working_price == "price_serg") {
-                $price_serg = (new Price_serg())->pars($currency);
-            } else {
-                $price_serg = "";
+                (new Price_serg())->pars($currency);
             }
 
             if ($working_price == "price_nereida") {
-                $price_nereida = (new Price_nereida())->pars();
-            } else {
-                $price_nereida = "";
+                (new Price_nereida())->pars();
             }
 
             if ($working_price == "price_shik") {
-                $price_nereida = (new Price_shik())->pars();
-            } else {
-                $price_nereida = "";
+                (new Price_shik())->pars();
             }
-
-
         }
 
         return redirect('/');

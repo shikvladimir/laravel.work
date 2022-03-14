@@ -237,7 +237,7 @@
 <script src="{{asset('assets/js/jquery-migrate-1.2.1.min.js')}}"></script>
 <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('assets/js/templatemo.js')}}"></script>
-<script src="{{asset('assets/js/custom.js')}}"></script>
+<script src="{{asset('assets/js/popups.js')}}"></script>
 <script src="//api-maps.yandex.ru/2.0/?load=package.full&lang=ru-RU"></script>
 
 <!-- End Script -->

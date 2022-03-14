@@ -205,7 +205,7 @@
 <script src="{{asset('js/jquery-migrate-1.2.1.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('js/templatemo.js')}}"></script>
-<script src="{{asset('js/custom.js')}}"></script>
+<script src="{{asset('js/popups.js')}}"></script>
 <!-- End Script -->
 </body>
 

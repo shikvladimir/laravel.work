@@ -18,6 +18,7 @@
         this.value = this.value.replace('$','*');
         this.value = this.value.replace('%','*');
         this.value = this.value.replace('/','*');
+        this.value = this.value.replace('&','*');
     }
 
     chat_name.oninput = function(){
@@ -26,6 +27,7 @@
         this.value = this.value.replace('$','*');
         this.value = this.value.replace('%','*');
         this.value = this.value.replace('/','*');
+        this.value = this.value.replace('&','*');
     }
 
     any_user_name.oninput = function(){
@@ -34,5 +36,6 @@
         this.value = this.value.replace('$','*');
         this.value = this.value.replace('%','*');
         this.value = this.value.replace('/','*');
+        this.value = this.value.replace('&','*');
     }
 
