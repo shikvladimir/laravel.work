@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 
-use App\Helpers\UploadPrice\CSVformat;
-use App\Helpers\UploadPrice\XmlFormat;
-use Illuminate\Http\Request;
+use App\Helpers\GetNewPriceInterface;
 
 class GetNewPriceController extends Controller
 {
-    public function uploadPrice(CSVformat $getNewPrice){
+    public function uploadPrice(GetNewPriceInterface $getNewPrice){
 
         $getNewPrice->get_new_price();
 

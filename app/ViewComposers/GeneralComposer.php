@@ -2,6 +2,7 @@
 
 namespace App\ViewComposers;
 
+use App\Models\Any_users;
 use App\Models\Price;
 use Illuminate\View\View;
 
@@ -19,10 +20,13 @@ class GeneralComposer
             unset($files[0]);
             unset($files[1]);
 
+            $any_user_id = Any_users::query()->get();
+
             return $view
                 ->with('datas', $datas)
                 ->with('data',$data)
-                ->with('files',$files);
+                ->with('files',$files)
+                ->with('any_user_id',$any_user_id);
         }
 
 
