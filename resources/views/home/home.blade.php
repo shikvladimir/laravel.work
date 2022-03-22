@@ -64,6 +64,7 @@
         </tr>
         </thead>
         <tbody>
+        @include('flash-message.flash-message')
         @foreach($data as $value)
             <tr>
 

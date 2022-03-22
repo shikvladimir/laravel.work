@@ -48,6 +48,7 @@ Route::post('chatsUser', [ChatsUserController::class, 'chatsUser'])
 
 Route::prefix('admin')->name('admin.')
     ->middleware(CheckAuth::class)
+    ->middleware('toAdmin')
     ->group(function () {
         Route::resources([
             'users' => UsersController::class,
